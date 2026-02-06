@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-    <Box sx={{ color: "primary.main" , border:"2px solid red"}} >Hello World</Box>
+    <Box sx={{ backgroundColor: "neutral.900" ,height:"100vh",color:"white" }} >Hello World</Box>
     </>
   )
 }
