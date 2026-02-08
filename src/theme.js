@@ -3,9 +3,11 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     common: {
-      white: "hsl(0, 0%, 100%)",
+      white: "hsl(240, 6%, 70%)",
     },
     neutral: {
+      main: "hsl(243, 27%, 20%)",
+      contrastText: "#fff",
       900: "hsl(243, 96%, 9%)",
       800: "hsl(243, 27%, 20%)",
       700: "hsl(243, 23%, 24%)",
