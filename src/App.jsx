@@ -1,13 +1,38 @@
-import { Box } from '@mui/material'
+import { Box, Grid, Paper } from '@mui/material'
 import './App.css'
 import NavBar from './components/NavBar'
+import styled from '@emotion/styled';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: (theme.vars ?? theme).palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
+
+
+
 function App() {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }}>
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }}>
         <NavBar />
-      </Box>
+        <Grid size={12}>
+          <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
+        </Grid>
+        <Grid size={8}>
+          <Item>size=4</Item>
+        </Grid>
+        <Grid size={4}>
+          <Item>size=4</Item>
+        </Grid>
+
+      </Grid>
     </>
   )
 }
