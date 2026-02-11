@@ -4,7 +4,7 @@ import NavBar from './components/NavBar'
 import styled from '@emotion/styled';
 import SearchBox from './components/SearchBox';
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled(Typography)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -37,9 +37,7 @@ function App() {
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }}>
         <NavBar />
         <Grid size={12}>
-          <Typography>BANNER HEADING AND SEARCH BOX COMES HERE</Typography>
-         
-          <Item2> <SearchBox/></Item2>
+          <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
         </Grid>
         <Grid size={8}>
           <Item>size=4</Item>
