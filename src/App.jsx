@@ -1,7 +1,8 @@
-import { Box, Grid, Paper } from '@mui/material'
+import { Box, Grid, Paper, Typography } from '@mui/material'
 import './App.css'
 import NavBar from './components/NavBar'
 import styled from '@emotion/styled';
+import SearchBox from './components/SearchBox';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -14,6 +15,19 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+const Item2 = styled(Typography)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: (theme.vars ?? theme).palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
+
+
+
 
 
 function App() {
@@ -23,7 +37,9 @@ function App() {
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }}>
         <NavBar />
         <Grid size={12}>
-          <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
+          <Typography>BANNER HEADING AND SEARCH BOX COMES HERE</Typography>
+         
+          <Item2> <SearchBox/></Item2>
         </Grid>
         <Grid size={8}>
           <Item>size=4</Item>
