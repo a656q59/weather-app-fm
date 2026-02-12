@@ -38,6 +38,7 @@ function App() {
         <NavBar />
         <Grid size={12}>
           <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
+          <Item2><SearchBox /></Item2>
         </Grid>
         <Grid size={8}>
           <Item>size=4</Item>
