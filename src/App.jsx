@@ -3,6 +3,7 @@ import './App.css'
 import NavBar from './components/NavBar'
 import styled from '@emotion/styled';
 import SearchBox from './components/SearchBox';
+import Minicard from './components/Minicard';
 
 const Item = styled(Typography)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -41,7 +42,7 @@ function App() {
           <Item2><SearchBox /></Item2>
         </Grid>
         <Grid size={8}>
-          <Item>size=4</Item>
+          <Item><Minicard title="Feels Like" value="64" /></Item>
         </Grid>
         <Grid size={4}>
           <Item>size=4</Item>
