@@ -1,16 +1,17 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 export default function Minicard({ title, value }) {
     return (
-        <div sx={{
+        <Box sx={{
             border: "2px solid red",
-            bgColor: "red",
+            bgColor: "green",
             display: "flex",
             flexDirection: "column"
         }}>
-            <div>{title}</div>
-            <div>{value}</div>
+            <Box>{title}</Box>
+            <Box>{value}</Box>
 
-        </div>
+        </Box>
     )
 }
