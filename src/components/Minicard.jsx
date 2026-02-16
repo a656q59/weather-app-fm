@@ -7,9 +7,11 @@ export default function Minicard({ title, value }) {
             border: "2px solid red",
             bgColor: "green",
             display: "flex",
-            flexDirection: "column"
+            borderRadius: "13px",
+            flexDirection: "column",
+            padding: "12px 10px"
         }}>
-            <Box>{title}</Box>
+            <Box sx={{ fontSize: "10px" }}>{title}</Box>
             <Box>{value}</Box>
 
         </Box>

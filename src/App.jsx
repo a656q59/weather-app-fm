@@ -41,8 +41,11 @@ function App() {
           <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
           <Item2><SearchBox /></Item2>
         </Grid>
-        <Grid size={8}>
-          <Item><Minicard title="Feels Like" value="64" /></Item>
+        <Grid size={8} sx={{ display: "flex", flexDirection: "row", border: "2px solid red" }} gap={3}>
+          <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
+          <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
+          <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
+          <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
         </Grid>
         <Grid size={4}>
           <Item>size=4</Item>
