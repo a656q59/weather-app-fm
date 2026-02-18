@@ -47,6 +47,7 @@ function App() {
           <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
           <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
           <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
+          <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
 
         </Grid>
         <Grid size={4}>
