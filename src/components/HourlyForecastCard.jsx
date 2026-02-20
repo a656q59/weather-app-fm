@@ -1,16 +1,23 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export default function HourlyForecastCard() {
+export default function HourlyForecastCard({ img, hour = "3 PM", tempurature = "68" }) {
     return (
         <Box
-            sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            sx={(theme) => ({
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "10px 20px",
+                backgroundColor: theme.palette.neutral.main
+            })}
+        >
             {/* some image */}
             <Typography>
-                3PM
+                {hour}
             </Typography>
             <Typography>
-                68
+                {tempurature}
             </Typography>
 
         </Box>
