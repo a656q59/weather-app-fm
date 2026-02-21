@@ -59,6 +59,7 @@ function App() {
           </Grid>
           <Grid size={5} sx={{ border: "2px solid red", }}>
             <HourlyForecastCard />
+            <HourlyForecastCard />
           </Grid>
 
         </Grid>
