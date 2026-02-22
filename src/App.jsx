@@ -6,6 +6,7 @@ import SearchBox from './components/SearchBox';
 import Minicard from './components/Minicard';
 import BannerTempCard from './components/BannerTempCard';
 import HourlyForecastCard from './components/HourlyForecastCard';
+import useFetchWeatherData from './services/useFetchWeatherData';
 
 const Item = styled(Typography)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -34,7 +35,7 @@ const Item2 = styled(Typography)(({ theme }) => ({
 
 
 function App() {
-
+  const k = useFetchWeatherData();
   return (
     <>
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }} >
