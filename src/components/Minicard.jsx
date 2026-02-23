@@ -3,15 +3,16 @@ import React from 'react'
 
 export default function Minicard({ title, value }) {
     return (
-        <Box sx={{
-            border: "2px solid red",
-            bgColor: "green",
+        <Box sx={(theme) => ({
+            backgroundColor: theme.palette.neutral.main,
             display: "flex",
             borderRadius: "13px",
             flexDirection: "column",
-            padding: "12px 10px"
-        }}>
-            <Box sx={{ fontSize: "10px" }}>{title}</Box>
+            padding: "15px 20px",
+            maxWidth: "150px",
+            width: "150px"
+        })}>
+            <Box sx={{ fontSize: "10px", marginBottom: "7px" }}>{title}</Box>
             <Box>{value}</Box>
 
         </Box>

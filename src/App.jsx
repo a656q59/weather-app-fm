@@ -47,16 +47,16 @@ function App() {
         <Grid size={12} sx={{ border: "2px solid gold", display: "flex", flexDirection: "row" }}>
           <Grid size={7} sx={{ display: "flex", flexDirection: "column", border: "2px solid red" }} gap={3}>
             <BannerTempCard />
-            <Grid size={12} sx={{ display: "flex", flexDirection: "row", border: "2px solid red" }} gap={3}>
+            <Box size={12} sx={{ display: "flex", flexDirection: "row", border: "2px solid red", justifyContent: "space-between" }} gap={3}>
 
-              <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
-              <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
-              <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
-              <Grid size={4}><Minicard title="Feels Like" value="64" /></Grid>
+              <Minicard title="Feels Like" value="64" />
+              <Minicard title="Feels Like" value="64" />
+              <Minicard title="Feels Like" value="64" />
+              <Minicard title="Feels Like" value="64" />
 
 
 
-            </Grid>
+            </Box>
           </Grid>
           <Grid size={5} sx={{ border: "2px solid red", }}>
             <HourlyForecastCard />

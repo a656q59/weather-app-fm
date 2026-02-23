@@ -31,7 +31,7 @@ export default function BannerTempCard() {
                     alignItems: "center",
                     justifyContent: "space-between",
                     color: "white",
-                    width: "100%",
+                    // width: "100%",
                     px: 2,
                 }}
             >
