@@ -7,13 +7,18 @@ import Minicard from './components/Minicard';
 import BannerTempCard from './components/BannerTempCard';
 import HourlyForecastCard from './components/HourlyForecastCard';
 import useFetchWeatherData from './services/useFetchWeatherData';
+import HourlyForecastContainer from './containers/HourlyForecastContainer';
 
-const Item = styled(Typography)(({ theme }) => ({
-  backgroundColor: '#fff',
+const Item = styled(Box)(({ theme }) => ({
+  backgroundColor: 'transparent',
   ...theme.typography.body2,
+  display: "flex",
+  fontSize: "30px",
+
+  letterSpacing: ".02rem",
+  justifyContent: "center",
   padding: theme.spacing(1),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
+  color: "neutral.0",
   ...theme.applyStyles('dark', {
     backgroundColor: '#1A2027',
   }),
@@ -38,11 +43,14 @@ function App() {
   const k = useFetchWeatherData();
   return (
     <>
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white" }} >
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white", padding: "0vh 25vh" }} >
         <NavBar />
         <Grid size={12} sx={{ border: "2px solid white" }}>
-          <Item>BANNER HEADING AND SEARCH BOX COMES HERE</Item>
-          <SearchBox />
+          <Item>How's the sky looking today? </Item>
+
+          <Item> <SearchBox /> </Item>
+
+
         </Grid>
         <Grid size={12} sx={{ border: "2px solid gold", display: "flex", flexDirection: "row" }}>
           <Grid size={7} sx={{ display: "flex", flexDirection: "column", border: "2px solid red" }} gap={3}>
@@ -59,8 +67,8 @@ function App() {
             </Box>
           </Grid>
           <Grid size={5} sx={{ border: "2px solid red", }}>
-            <HourlyForecastCard />
-            <HourlyForecastCard />
+            <HourlyForecastContainer />
+
           </Grid>
 
         </Grid>
