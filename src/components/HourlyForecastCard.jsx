@@ -9,17 +9,17 @@ export default function HourlyForecastCard({ img, hour = "3 PM", tempurature = "
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px 20px",
-                backgroundColor: theme.palette.neutral.main
+                backgroundColor: "neutral.800"
             })}
         >
             {/* some image */}
-            <Typography>
+            < Typography >
                 {hour}
             </Typography>
             <Typography>
                 {tempurature}
             </Typography>
 
-        </Box>
+        </ Box>
     )
 }
