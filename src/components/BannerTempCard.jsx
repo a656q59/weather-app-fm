@@ -8,17 +8,18 @@ export default function BannerTempCard() {
         <Box
             sx={{
                 position: "relative",
-                width: "100%",
-                minHeight: "20vh", // full screen hero
+                width: "44vw",
+                minHeight: "30vh", // full screen hero
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                borderRadius: "20px",
 
                 backgroundImage: {
                     xs: `url(${image_small})`,
                     lg: `url(${image_large})`,
                 },
-                backgroundSize: "contain",   // 🔥 never crop
+                backgroundSize: "cover",   // 🔥 never crop
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundColor: "#000",     // fills empty space nicely
@@ -31,7 +32,8 @@ export default function BannerTempCard() {
                     alignItems: "center",
                     justifyContent: "space-between",
                     color: "white",
-                    // width: "100%",
+                    width: "100%",
+
                     px: 2,
                 }}
             >
