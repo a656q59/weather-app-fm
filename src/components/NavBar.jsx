@@ -14,33 +14,31 @@ export default function ButtonAppBar() {
     const theme = useTheme();
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: "neutral.900" }}>
-                <Toolbar >
-                    <IconButton
-                        size="large"
-                        color="theme.palette.neutral.700"
-                        aria-label="menu"
-                        sx={{ mr: 2, flexGrow: 1, display: "flex", justifyContent: "start", padding: "0px", }}
-                    >
-                        <img src={logo} />
-                    </IconButton>
-                    <Typography variant="h6" component="div">
+        <Box sx={{ flexGrow: 1, }}>
+            <AppBar position="static" sx={{ backgroundColor: "neutral.900", paddingTop: "10px", paddingBottom: "10px", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                <IconButton
+                    size="large"
+                    color="theme.palette.neutral.700"
+                    aria-label="menu"
+                    sx={{ mr: 2, flexGrow: 1, display: "flex", justifyContent: "start", padding: "0px", }}
+                >
+                    <img src={logo} />
+                </IconButton>
+                <Typography variant="h6" component="div">
 
-                    </Typography>
-                    <Button color="neutral"
-                        variant="contained"
-                        startIcon={
-                            <img src={units} />
-                        }
-                        endIcon={
-                            <img src={dropdown} />
-                        }
+                </Typography>
+                <Button color="neutral"
+                    variant="contained"
+                    startIcon={
+                        <img src={units} />
+                    }
+                    endIcon={
+                        <img src={dropdown} />
+                    }
 
-                    >
-                        Units
-                    </Button>
-                </Toolbar>
+                >
+                    Units
+                </Button>
             </AppBar>
         </Box >
     );
