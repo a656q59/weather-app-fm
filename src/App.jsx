@@ -14,7 +14,6 @@ const Item = styled(Box)(({ theme }) => ({
   ...theme.typography.body2,
   display: "flex",
   fontSize: "30px",
-
   letterSpacing: ".02rem",
   justifyContent: "center",
   padding: theme.spacing(1),
@@ -43,19 +42,19 @@ function App() {
   const k = useFetchWeatherData();
   return (
     <>
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white", padding: "0vh 25vh" }} >
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white", padding: "0vh 25vh" }} gap={.1}>
         <NavBar />
-        <Grid size={12} sx={{ border: "2px solid white" }}>
-          <Item>How's the sky looking today? </Item>
 
+        <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", height: "16vh" }}>
+          <Item>How's the sky looking today? </Item>
           <Item> <SearchBox /> </Item>
 
-
         </Grid>
-        <Grid size={12} sx={{ border: "2px solid gold", display: "flex", flexDirection: "row" }}>
-          <Grid size={7} sx={{ display: "flex", flexDirection: "column", border: "2px solid red" }} gap={3}>
+
+        <Grid size={12} sx={{ display: "flex", flexDirection: "row", height: "55vh", }} gap={13}>
+          <Grid size={7} sx={{ display: "flex", flexDirection: "column", }} gap={3}>
             <BannerTempCard />
-            <Box size={12} sx={{ display: "flex", flexDirection: "row", border: "2px solid red", justifyContent: "space-between" }} gap={3}>
+            <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }} gap={3}>
 
               <Minicard title="Feels Like" value="64" />
               <Minicard title="Feels Like" value="64" />
@@ -66,7 +65,7 @@ function App() {
 
             </Box>
           </Grid>
-          <Grid size={5} sx={{ border: "2px solid red", }}>
+          <Grid size={5} sx={{}}>
             <HourlyForecastContainer />
 
           </Grid>
