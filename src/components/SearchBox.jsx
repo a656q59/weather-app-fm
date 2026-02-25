@@ -89,8 +89,8 @@ export default function SearchBox() {
   };
 
   return (
-    <Box sx={{ width: 500 }}>
-      <Box sx={{ display: "flex", gap: 2 }}>
+    <Box sx={{ width: 600 }}>
+      <Box sx={{ display: "flex", gap: 2, }}>
         <Autocomplete
           fullWidth
           options={options}
@@ -108,6 +108,11 @@ export default function SearchBox() {
               {...params}
               label="Search places"
               variant="outlined"
+              sx={{
+                backgroundColor: "neutral.800",
+                borderRadius: "12px",
+                color: "common.white"
+              }}
               InputProps={{
                 ...params.InputProps,
                 endAdornment: (
@@ -121,17 +126,17 @@ export default function SearchBox() {
           )}
         />
 
-        <Button variant="contained" onClick={handleSearch}>
+        <Button variant="contained" onClick={handleSearch} sx={{ borderRadius: "12px", padding: "0px 50px" }}>
           Search
         </Button>
       </Box>
 
-      {result && (
+      {/* {result && (
         <Box sx={{ mt: 3 }}>
           <div><strong>Latitude:</strong> {result.lat}</div>
           <div><strong>Longitude:</strong> {result.lon}</div>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 }
