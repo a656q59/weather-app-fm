@@ -39,22 +39,24 @@ const Item2 = styled(Typography)(({ theme }) => ({
 
 
 function App() {
-  const k = useFetchWeatherData();
+  const { weatherInfo } = useFetchWeatherData();
+
+  // console.log(k?.daily, "<-------------------------k")
   return (
     <>
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white", padding: "0vh 25vh" }} gap={.1}>
         <NavBar />
 
-        <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", height: "16vh" }}>
+        <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", }}>
           <Item>How's the sky looking today? </Item>
           <Item> <SearchBox /> </Item>
 
         </Grid>
 
-        <Grid size={12} sx={{ display: "flex", flexDirection: "row", height: "55vh", }} gap={13}>
-          <Grid size={7} sx={{ display: "flex", flexDirection: "column", }} gap={3}>
+        <Grid size={12} sx={{ display: "flex", flexDirection: "row", height: "55vh", }} gap={1}>
+          <Grid size={7.4} sx={{ display: "flex", flexDirection: "column", alignItems: "end", }} gap={3}>
             <BannerTempCard />
-            <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }} gap={3}>
+            <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }} gap={3}>
 
               <Minicard title="Feels Like" value="64" />
               <Minicard title="Feels Like" value="64" />
@@ -65,8 +67,8 @@ function App() {
 
             </Box>
           </Grid>
-          <Grid size={5} sx={{}}>
-            <HourlyForecastContainer />
+          <Grid size={4.5} sx={{}}>
+            <HourlyForecastContainer data={weatherInfo} />
 
           </Grid>
 
