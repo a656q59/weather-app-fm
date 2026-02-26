@@ -16,7 +16,8 @@ const useFetchWeatherData = () => {
         const params = {
             latitude: 52.52,
             longitude: 13.41,
-            hourly: "temperature_2m",
+            hourly: "apparent_temperature",
+            daily: ["temperature_2m_max", "temperature_2m_min", "weather_code"],
             current: ["wind_speed_10m", "apparent_temperature", "precipitation", "relative_humidity_2m"],
         };
         const url = "https://api.open-meteo.com/v1/forecast";
@@ -40,10 +41,12 @@ const useFetchWeatherData = () => {
                 `\nCoordinates: ${latitude}°N ${longitude}°E`,
                 `\nElevation: ${elevation}m asl`,
                 `\nTimezone difference to GMT+0: ${utcOffsetSeconds}s`,
+                `\n weather info:`, weatherInfo
             );
 
             const current = response.current();
             const hourly = response.hourly();
+            const daily = response.daily();
 
             // Note: The order of weather variables in the URL query and the indices below need to match!
             setWeatherInfo({
@@ -59,7 +62,16 @@ const useFetchWeatherData = () => {
                         { length: (Number(hourly.timeEnd()) - Number(hourly.time())) / hourly.interval() },
                         (_, i) => new Date((Number(hourly.time()) + i * hourly.interval() + utcOffsetSeconds) * 1000)
                     ),
-                    temperature_2m: hourly.variables(0).valuesArray(),
+                    apparent_temperature: hourly.variables(0).valuesArray(),
+                },
+                daily: {
+                    time: Array.from(
+                        { length: (Number(daily.timeEnd()) - Number(daily.time())) / daily.interval() },
+                        (_, i) => new Date((Number(daily.time()) + i * daily.interval() + utcOffsetSeconds) * 1000)
+                    ),
+                    temperature_2m_max: daily.variables(0).valuesArray(),
+                    temperature_2m_min: daily.variables(1).valuesArray(),
+                    weather_code: daily.variables(2).valuesArray(),
                 },
             })
         }
@@ -78,7 +90,7 @@ const useFetchWeatherData = () => {
     // );
     // console.log("\nHourly data:\n", weatherData.hourly)
 
-    return weatherInfo;
+    return { weatherInfo };
 }
 
 export default useFetchWeatherData
