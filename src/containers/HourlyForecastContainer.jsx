@@ -19,8 +19,11 @@ export default function HourlyForecastContainer({ data }) {
             <Typography>
                 Hourly Forecast
             </Typography>
-            <HourlyForecastCard />
-            <HourlyForecastCard />
+            {
+                data?.hourly.map((item) => (
+                    <HourlyForecastCard hour={item.time.toString()} tempurature={item.apparent_tempurature} />
+                ))
+            }
         </Grid>
     )
 }
