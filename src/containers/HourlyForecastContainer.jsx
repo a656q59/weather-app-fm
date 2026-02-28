@@ -10,7 +10,7 @@ export default function HourlyForecastContainer({ data }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,
-                borderRadius: "20px",
+                borderRadius: "30px",
                 height: "100%",
                 marginLeft: "3px",
                 padding: "20px 22px",
