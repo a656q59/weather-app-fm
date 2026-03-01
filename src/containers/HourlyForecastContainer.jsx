@@ -3,7 +3,6 @@ import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
 
 export default function HourlyForecastContainer({ data }) {
-    console.log("data inside hoursly container", data)
     return (
         <Grid container
             sx={(theme) => ({
