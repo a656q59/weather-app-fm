@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
 
 export default function HourlyForecastContainer({ data }) {
-    const keys = Object.keys(data);
-    const length = data[keys[0]].length;
+
+    useEffect(() => {
+        const keys = Object.keys(data);
+        const length = data[keys[0]].length;
+    }, [data])
 
     return (
         <Grid container
@@ -22,12 +25,12 @@ export default function HourlyForecastContainer({ data }) {
                 Hourly Forecast
             </Typography>
 
-            {Array.from({ length }).map((_, index) => (
+            {/* {Array.from({ length }).map((_, index) => (
                 <HourlyForecastCard
                     key={index}
                     values={keys.map((key) => data[key][index])}
                 />
-            ))}
+            ))} */}
 
 
             {/* {
