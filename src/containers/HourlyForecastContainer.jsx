@@ -4,10 +4,10 @@ import { Box, Grid, Typography } from '@mui/material'
 
 export default function HourlyForecastContainer({ data }) {
 
-    useEffect(() => {
-        const keys = Object.keys(data);
-        const length = data[keys[0]].length;
-    }, [data])
+    // useEffect(() => {
+    //     const keys = Object.keys(data);
+    //     const length = data[keys[0]].length;
+    // }, [data])
 
     return (
         <Grid container
@@ -31,13 +31,17 @@ export default function HourlyForecastContainer({ data }) {
                     values={keys.map((key) => data[key][index])}
                 />
             ))} */}
+            {data && Object.values(data.hourly)[0].map((_, i) => (
+                <HourlyForecastCard hour={Object.values(data.hourly)[0][i].getHours()} tempurature={(parseFloat(Object.values(data.hourly)[1][i]) * 100).toFixed(2)} />
+            )
 
+            )}
 
-            {/* {
-                data?.hourly.map((item) => (
-                    <HourlyForecastCard hour={item.time.toString()} tempurature={item.apparent_tempurature} />
+            {
+                data?.hourly?.time?.map((item) => (
+                    <HourlyForecastCard hour={item.toDateString()} />
                 ))
-            } */}
+            }
         </Grid>
     )
 }
