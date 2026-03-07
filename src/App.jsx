@@ -41,7 +41,6 @@ const Item2 = styled(Typography)(({ theme }) => ({
 function App() {
   const { weatherInfo } = useFetchWeatherData();
 
-  // console.log(k?.daily, "<-------------------------k")
   return (
     <>
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", color: "white", padding: "0vh 25vh" }} gap={.1}>
