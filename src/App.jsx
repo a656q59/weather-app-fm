@@ -8,6 +8,7 @@ import BannerTempCard from './components/BannerTempCard';
 import HourlyForecastCard from './components/HourlyForecastCard';
 import useFetchWeatherData from './services/useFetchWeatherData';
 import HourlyForecastContainer from './containers/HourlyForecastContainer';
+import DailyForecastContainer from './containers/DailyForecastContainer';
 
 const Item = styled(Box)(({ theme }) => ({
   backgroundColor: 'transparent',
@@ -52,7 +53,7 @@ function App() {
 
         </Grid>
 
-        <Grid size={12} sx={{ display: "flex", flexDirection: "row", height: "55vh", }} gap={1}>
+        <Grid size={12} sx={{ display: "flex", flexDirection: "row", border: "2px solid red" }} gap={1}>
           <Grid size={7.4} sx={{ display: "flex", flexDirection: "column", alignItems: "end", }} gap={3}>
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }} gap={3}>
@@ -65,6 +66,15 @@ function App() {
 
 
             </Box>
+
+            <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }} gap={3}>
+
+              <DailyForecastContainer />
+
+
+
+            </Box>
+
           </Grid>
           <Grid size={4.5} sx={{}}>
             <HourlyForecastContainer data={weatherInfo} />
