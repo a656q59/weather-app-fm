@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
+import iconDrizzle from "../assets/images/icon-drizzle.webp";
 
 export default function HourlyForecastContainer({ data }) {
+    const { time = [], apparent_temperature = [] } = data?.hourly || {};
 
     // useEffect(() => {
     //     const keys = Object.keys(data);
@@ -31,17 +33,33 @@ export default function HourlyForecastContainer({ data }) {
                     values={keys.map((key) => data[key][index])}
                 />
             ))} */}
-            {data && Object.values(data.hourly)[0].map((_, i) => (
-                <HourlyForecastCard hour={Object.values(data.hourly)[0][i].getHours()} tempurature={(parseFloat(Object.values(data.hourly)[1][i]) * 100).toFixed(2)} />
-            )
 
-            )}
+            {/* {time.map((t, i) => {
+                const hour = new Date(t).getHours();
 
-            {
-                data?.hourly?.time?.map((item) => (
-                    <HourlyForecastCard hour={item.toDateString()} />
-                ))
-            }
+                return (
+                    <HourlyForecastCard
+                        key={i}
+                        hour={hour > 12 ? hour - 12 : hour}
+                        tempurature={(temperature[i] * 100).toFixed(2)}
+                    />
+                );
+            })} */}
+
+            {data?.hourly?.time?.map((t, i) => {
+                // console.log(, "<-------------tempurature")
+                if (new Date(t).getDate() !== new Date().getDate()) return;
+                if (new Date(t).getHours() < 15 || new Date(t).getHours() > 22) return;
+                const hour = new Date(t).getHours();
+                return (
+                    <HourlyForecastCard
+                        key={i}
+                        img={iconDrizzle}
+                        hour={hour > 12 ? hour - 12 : hour}
+                        tempurature={(apparent_temperature[i]).toFixed(0)}
+                    />
+                );
+            })}
         </Grid>
     )
 }
