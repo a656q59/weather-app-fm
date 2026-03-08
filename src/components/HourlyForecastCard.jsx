@@ -1,11 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export default function HourlyForecastCard({ img, hour = "3 PM", tempurature = "68" }) {
+export default function HourlyForecastCard({ img, hour = "3", tempurature = "68" }) {
     return (
         <Box
             sx={(theme) => ({
                 display: "flex",
+                flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px 20px",
@@ -13,13 +14,22 @@ export default function HourlyForecastCard({ img, hour = "3 PM", tempurature = "
                 borderRadius: "10px"
             })}
         >
-            {/* some image */}
-            < Typography >
-                {hour}
-            </Typography>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center"
+            }}>
+                <img src={img} alt="Image" width="35px" height="35px" />
+                < Typography >
+                    {hour} PM
+                </Typography>
+            </Box>
+
             <Typography>
                 {tempurature}
             </Typography>
+
+
 
         </ Box>
     )
