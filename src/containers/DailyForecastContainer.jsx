@@ -27,6 +27,7 @@ export default function DailyForecastContainer({ data }) {
             </Typography>
 
             <DailyForecastCard img={iconDrizzle} day="Tue" minTemp="20" maxTemp="30" />
+            <DailyForecastCard img={iconDrizzle} day="Tue" minTemp="20" maxTemp="30" />
 
 
 
