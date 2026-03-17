@@ -8,7 +8,7 @@ export default function BannerTempCard() {
         <Box
             sx={{
                 position: "relative",
-                width: "34vw",
+                width: "33.9vw",
                 minHeight: "30vh", // full screen hero
                 display: "flex",
                 alignItems: "center",
