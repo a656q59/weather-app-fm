@@ -9,8 +9,8 @@ export default function Minicard({ title, value }) {
             borderRadius: "13px",
             flexDirection: "column",
             padding: "15px 20px",
-            maxWidth: "190px",
-            width: "190px"
+            // maxWidth: "190px",
+            width: "100%"
         })}>
             <Box sx={{ fontSize: "10px", marginBottom: "7px" }}>{title}</Box>
             <Box>{value}</Box>
