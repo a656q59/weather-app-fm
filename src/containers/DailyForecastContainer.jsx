@@ -16,24 +16,25 @@ export default function DailyForecastContainer({ data }) {
         <Grid container
             sx={(theme) => ({
                 display: "flex",
-                border: "2px solid yellow",
                 flexDirection: "column",
                 gap: 2,
                 borderRadius: "30px",
                 height: "100%",
                 marginLeft: "3px",
-                padding: "0px 0px",
+                // padding: "0px 22px",
                 backgroundColor: "transparent",
-                width: "100%"
+                width: "100%",
+                justifyContent: "space-between"
+                // height: "35%"
             })}>
-            <Typography>
-                Daily forecast
-            </Typography>
-            <Grid container display="flex" direction="row" justifyContent="space-between" gap={3}>
+            <Grid item>
+                <Typography>
+                    Daily forecast
+                </Typography>
+            </Grid>
+            <Grid item container display="flex" direction="row" justifyContent="space-between" gap={3} sx={{ height: "auto" }}>
 
                 {data?.daily?.time?.map((t, i) => {
-
-
                     return (
                         <DailyForecastCard
                             key={i}
