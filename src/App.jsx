@@ -43,8 +43,8 @@ function App() {
   const { weatherInfo } = useFetchWeatherData();
 
   return (
-    <Grid container border="2px solid green">
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 75vh" }} gap={.1} border="2px solid red">
+    <Grid container >
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 75vh", }} gap={.1} >
         <NavBar />
 
         <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", }}>
@@ -53,8 +53,8 @@ function App() {
 
         </Grid>
 
-        <Grid size={12} sx={{ display: "flex", flexDirection: "row", alignItems: "center", border: "2px solid red" }} gap={1} >
-          <Grid size={9} sx={{ display: "flex", flexDirection: "column", alignItems: "end", border: "2px solid red", height: "100%" }} gap={3}>
+        <Grid size={12} sx={{ display: "flex", flexDirection: "row", alignItems: "center", }} gap={1} >
+          <Grid size={9} sx={{ display: "flex", flexDirection: "column", alignItems: "start", height: "100%", padding: "14px 10px", border: "2px solid red" }} gap={3}>
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
 
@@ -75,7 +75,7 @@ function App() {
 
 
           </Grid>
-          <Grid size={3} sx={{ border: "2px solid red" }}>
+          <Grid size={3} >
             <HourlyForecastContainer data={weatherInfo} />
 
           </Grid>
