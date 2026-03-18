@@ -18,7 +18,7 @@ export default function HourlyForecastContainer({ data }) {
                 flexDirection: "column",
                 gap: 2,
                 borderRadius: "30px",
-                height: "100%",
+                height: "auto",
                 marginLeft: "3px",
                 padding: "20px 22px",
                 backgroundColor: "neutral.700"
