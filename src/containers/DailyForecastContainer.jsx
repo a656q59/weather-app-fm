@@ -5,7 +5,6 @@ import iconDrizzle from "../assets/images/icon-drizzle.webp";
 import DailyForecastCard from '../components/DailyForecastCard';
 
 export default function DailyForecastContainer({ data }) {
-    console.log(data, "<--------------------data");
     const { time = [],
         temperature_2m_max = [],
         temperature_2m_min = [] } = data?.daily || {};
@@ -32,17 +31,19 @@ export default function DailyForecastContainer({ data }) {
                     Daily forecast
                 </Typography>
             </Grid>
-            <Grid item container display="flex" direction="row" justifyContent="space-between" gap={3} sx={{ height: "auto" }}>
+            <Grid item gap={4} sx={{ display: "flex", flexDirection: "row", height: "auto", }}>
 
                 {data?.daily?.time?.map((t, i) => {
                     return (
-                        <DailyForecastCard
-                            key={i}
-                            img={iconDrizzle}
-                            day={new Date(t).toLocaleDateString("en-US", { weekday: "long" }).substring(0, 3)}
-                            minTemp={temperature_2m_min[i].toFixed(0)}
-                            maxTemp={temperature_2m_max[i].toFixed(0)}
-                        />
+                        <Grid sx={{ width: "100%" }} >
+                            <DailyForecastCard
+                                key={i}
+                                img={iconDrizzle}
+                                day={new Date(t).toLocaleDateString("en-US", { weekday: "long" }).substring(0, 3)}
+                                minTemp={temperature_2m_min[i].toFixed(0)}
+                                maxTemp={temperature_2m_max[i].toFixed(0)}
+                            />
+                        </Grid>
                     );
                 })}
 

@@ -6,13 +6,15 @@ export default function DailyForecastCard({ img, day = "Tue", minTemp = "20", ma
         <Box
             sx={(theme) => ({
                 display: "flex",
+
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: "10px 25px",
                 backgroundColor: "neutral.800",
                 borderRadius: "10px",
-                height: "100%"
+                height: "100%",
+                width: "100%"
 
 
             })}
