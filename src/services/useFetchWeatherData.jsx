@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 const useFetchWeatherData = () => {
     const [weatherInfo, setWeatherInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    console.log()
 
 
 
