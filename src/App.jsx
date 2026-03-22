@@ -44,7 +44,7 @@ function App() {
   console.log(weatherInfo, "<---------------weatherInfo")
   return (
     <Grid container >
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 60vh", }} gap={.1} >
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 15%", }} gap={.1} >
         <NavBar />
 
         <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", }}>
@@ -54,7 +54,7 @@ function App() {
         </Grid>
 
         <Grid size={12} sx={{ display: "flex", flexDirection: "row", alignItems: "center", }} gap={1} >
-          <Grid size={9} sx={{ display: "flex", flexDirection: "column", alignItems: "start", height: "100%", padding: "14px 10px", }} gap={3}>
+          <Grid size={8} sx={{ display: "flex", flexDirection: "column", alignItems: "start", height: "100%", padding: "14px 10px", }} gap={3}>
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
 
@@ -75,7 +75,7 @@ function App() {
 
 
           </Grid>
-          <Grid size={3} >
+          <Grid size={4} >
             <HourlyForecastContainer data={weatherInfo} />
 
           </Grid>
