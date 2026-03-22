@@ -16,7 +16,7 @@ export default function DailyForecastContainer({ data }) {
             sx={(theme) => ({
                 display: "flex",
                 flexDirection: "column",
-                gap: 2,
+                gap: 0,
                 borderRadius: "30px",
                 height: "100%",
                 marginLeft: "3px",
