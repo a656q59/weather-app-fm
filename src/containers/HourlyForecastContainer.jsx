@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
 import iconDrizzle from "../assets/images/icon-drizzle.webp";
+import Dropdown from '../components/ui/Dropdown';
 
 export default function HourlyForecastContainer({ data }) {
     const { time = [], apparent_temperature = [] } = data?.hourly || {};
@@ -23,9 +24,16 @@ export default function HourlyForecastContainer({ data }) {
                 padding: "20px 22px",
                 backgroundColor: "neutral.700"
             })}>
-            <Typography>
-                Hourly Forecast
-            </Typography>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+            }}>
+                <Typography>
+                    Hourly Forecast
+                </Typography>
+                <Dropdown />
+            </Box>
 
             {/* {Array.from({ length }).map((_, index) => (
                 <HourlyForecastCard
