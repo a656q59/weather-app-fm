@@ -23,11 +23,21 @@ export default function Dropdown() {
         <div>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <Select
+                    MenuProps={{
+                        PaperProps: {
+                            sx: {
+                                backgroundColor: "red",
+                                color: "white"
+                            },
+                        },
+                    }}
                     sx={{
-                        border: "2px solid red",
                         "& .MuiInputBase-input": {
                             padding: "5px 10px ",
                             color: "white"
+                        },
+                        "& .MuiPaper-root": {
+                            backgroundColor: "blue"
                         }
                     }}
                     open={open}
