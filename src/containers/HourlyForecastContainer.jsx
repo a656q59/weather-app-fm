@@ -11,7 +11,7 @@ export default function HourlyForecastContainer({ data }) {
     //     const keys = Object.keys(data);
     //     const length = data[keys[0]].length;
     // }, [data])
-
+    console.log("checking")
     return (
         <Grid container
             sx={(theme) => ({
