@@ -4,10 +4,8 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { InputLabel, MenuItem } from '@mui/material';
 
-export default function Dropdown() {
-    const handleChange = (value) => {
-        setAge(value)
-    }
+export default function Dropdown({ value, onClick }) {
+
     const handleOpen = () => {
         setOpen(true)
     }
@@ -16,7 +14,7 @@ export default function Dropdown() {
     }
 
 
-    const [age, setAge] = useState('');
+
     const [open, setOpen] = useState(false);
 
     return (
@@ -26,7 +24,7 @@ export default function Dropdown() {
                     MenuProps={{
                         PaperProps: {
                             sx: {
-                                backgroundColor: "red",
+                                backgroundColor: "neutral.700",
                                 color: "white"
                             },
                         },
@@ -43,16 +41,20 @@ export default function Dropdown() {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={age}
+                    value={value}
 
-                    onChange={(e) => handleChange(e.target.value)}
+                    onChange={(e) => onClick(e.target.value)}
                 >
                     <MenuItem value={0}>
                         <em>None</em>
                     </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value={0}>Sunday</MenuItem>
+                    <MenuItem value={1}>Monday</MenuItem>
+                    <MenuItem value={2}>Tuesday</MenuItem>
+                    <MenuItem value={3}>Wednesday</MenuItem>
+                    <MenuItem value={4}>Thursday</MenuItem>
+                    <MenuItem value={5}>Friday</MenuItem>
+                    <MenuItem value={6}>Saturday</MenuItem>
                 </Select>
             </FormControl>
         </div>
