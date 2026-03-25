@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from '@mui/material'
 import iconDrizzle from "../assets/images/icon-drizzle.webp";
 import DailyForecastCard from '../components/DailyForecastCard';
 
-export default function DailyForecastContainer({ data }) {
+export default function DailyForecastContainer({ data, loading }) {
     const { time = [],
         temperature_2m_max = [],
         temperature_2m_min = [] } = data?.daily || {};
@@ -38,6 +38,7 @@ export default function DailyForecastContainer({ data }) {
                         <Grid sx={{ width: "100%" }} >
                             <DailyForecastCard
                                 key={i}
+                                loading={loading}
                                 img={iconDrizzle}
                                 day={new Date(t).toLocaleDateString("en-US", { weekday: "long" }).substring(0, 3)}
                                 minTemp={temperature_2m_min[i].toFixed(0)}
