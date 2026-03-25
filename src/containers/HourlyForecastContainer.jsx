@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
 import iconDrizzle from "../assets/images/icon-drizzle.webp";
@@ -6,12 +6,15 @@ import Dropdown from '../components/ui/Dropdown';
 
 export default function HourlyForecastContainer({ data }) {
     const { time = [], apparent_temperature = [] } = data?.hourly || {};
-
+    // data.hourly.time.map(item =>)
+    const [value, setValue] = useState(0);
+    const handleChange = (value) => {
+        setValue(value)
+    }
     // useEffect(() => {
     //     const keys = Object.keys(data);
     //     const length = data[keys[0]].length;
     // }, [data])
-    console.log("checking")
     return (
         <Grid container
             sx={(theme) => ({
@@ -32,7 +35,7 @@ export default function HourlyForecastContainer({ data }) {
                 <Typography>
                     Hourly Forecast
                 </Typography>
-                <Dropdown />
+                <Dropdown value={value} onClick={handleChange} />
             </Box>
 
             {/* {Array.from({ length }).map((_, index) => (
@@ -55,8 +58,8 @@ export default function HourlyForecastContainer({ data }) {
             })} */}
 
             {data?.hourly?.time?.map((t, i) => {
-                // console.log(, "<-------------tempurature")
-                if (new Date(t).getDate() !== new Date().getDate()) return;
+                // console.log(, new Date(t).getDay(), value, "<-------------tempurature")
+                if (new Date(t).getDay() !== value) return;
                 if (new Date(t).getHours() < 15 || new Date(t).getHours() > 22) return;
                 const hour = new Date(t).getHours();
                 return (
