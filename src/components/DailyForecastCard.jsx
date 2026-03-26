@@ -1,7 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-export default function DailyForecastCard({ loading = false, img, day = "Tue", minTemp = "20", maxTemp = "30" }) {
+export default function DailyForecastCard({ loading, img, day = "Tue", minTemp = "20", maxTemp = "30" }) {
+    if (loading) return <Box
+        sx={{
+            color: "white",
+            border: "2px solid red"
+        }}>loading...</Box>
     return (
         <Box
             sx={(theme) => ({
@@ -20,34 +25,30 @@ export default function DailyForecastCard({ loading = false, img, day = "Tue", m
 
             })}
         >
-            {loading ?
-                <Box sx={{ backgroundColor: "transparent", height: "200px" }}></Box>
-                :
 
-                <>
-                    <Typography sx={{
-                        marginBottom: "20px"
-                    }}>
-                        {day}
-                    </Typography>
+            <Typography sx={{
+                marginBottom: "20px"
+            }}>
+                {day}
+            </Typography>
 
-                    <img src={img} width="40px" height="40px" alt="image" />
+            <img src={img} width="40px" height="40px" alt="image" />
 
-                    <Box sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        flexDirection: "row",
-                        width: "100%",
-                        marginTop: "20px"
-                    }}>
-                        <Typography>
-                            {minTemp}
-                        </Typography>
-                        <Typography>
-                            {maxTemp}
-                        </Typography>
-                    </Box></>}
+            <Box sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexDirection: "row",
+                width: "100%",
+                marginTop: "20px"
+            }}>
+                <Typography>
+                    {minTemp}
+                </Typography>
+                <Typography>
+                    {maxTemp}
+                </Typography>
+            </Box>
 
 
         </ Box>
