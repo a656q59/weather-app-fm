@@ -40,8 +40,11 @@ const Item2 = styled(Typography)(({ theme }) => ({
 
 
 function App() {
-  const { weatherInfo } = useFetchWeatherData();
-  console.log(weatherInfo, "<---------------weatherInfo")
+  const { weatherInfo, loading, error } = useFetchWeatherData();
+  console.log(weatherInfo, "<------  weatherInfo-------------------")
+
+
+
   return (
     <Grid container >
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 15%", }} gap={.1} >
@@ -69,7 +72,7 @@ function App() {
 
 
 
-            <DailyForecastContainer data={weatherInfo} />
+            <DailyForecastContainer data={weatherInfo} loading={loading} />
 
 
 
