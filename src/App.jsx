@@ -41,7 +41,7 @@ const Item2 = styled(Typography)(({ theme }) => ({
 
 function App() {
   const { weatherInfo, loading, error } = useFetchWeatherData();
-  console.log(weatherInfo, "<------  weatherInfo-------------------")
+  console.log(weatherInfo?.current, "<------  weatherInfo-------------------")
 
 
 
@@ -61,10 +61,10 @@ function App() {
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
 
-              <Minicard title="Feels Like" value="64" />
-              <Minicard title="Feels Like" value="64" />
-              <Minicard title="Feels Like" value="64" />
-              <Minicard title="Feels Like" value="64" />
+              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(2) * 10} />
+              <Minicard title="Humidity" value="64" />
+              <Minicard title="Wind" value="64" />
+              <Minicard title="Precipitation" value={weatherInfo?.current?.precipitation} />
 
 
 
