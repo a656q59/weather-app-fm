@@ -11,10 +11,11 @@ export default function HourlyForecastContainer({ data }) {
     const handleChange = (value) => {
         setValue(value)
     }
-    // useEffect(() => {
-    //     const keys = Object.keys(data);
-    //     const length = data[keys[0]].length;
-    // }, [data])
+    useEffect(() => {
+        setValue(data?.hourly?.time[0].getDay())
+    }, [data]);
+
+    // console.log(data?.hourly?.time[0].getDay(), "<----------------------")
     return (
         <Grid container
             sx={(theme) => ({
