@@ -61,9 +61,9 @@ function App() {
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
 
-              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(2) * 10} />
-              <Minicard title="Humidity" value="64" />
-              <Minicard title="Wind" value="64" />
+              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(0) * 10} />
+              <Minicard title="Humidity" value={weatherInfo?.current?.relative_humidity_2m} />
+              <Minicard title="Wind" value={weatherInfo?.current?.wind_speed_10m.toFixed(0)} />
               <Minicard title="Precipitation" value={weatherInfo?.current?.precipitation} />
 
 
