@@ -8,7 +8,7 @@ export default function Minicard({ title, value }) {
             display: "flex",
             borderRadius: "13px",
             flexDirection: "column",
-            padding: "15px 20px",
+            padding: "14px 20px",
             // maxWidth: "190px",
             width: "100%"
         })}>
