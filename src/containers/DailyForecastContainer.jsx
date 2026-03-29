@@ -9,7 +9,7 @@ export default function DailyForecastContainer({ data, loading }) {
         temperature_2m_max = [],
         temperature_2m_min = [] } = data?.daily || {};
 
-
+    console.log();
 
     return (
         <Grid container
