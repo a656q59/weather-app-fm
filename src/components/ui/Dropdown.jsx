@@ -4,7 +4,7 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { InputLabel, MenuItem } from '@mui/material';
 
-export default function Dropdown({ value, onClick }) {
+export default function Dropdown({ value = -1, onClick }) {
 
     const handleOpen = () => {
         setOpen(true)
@@ -43,11 +43,9 @@ export default function Dropdown({ value, onClick }) {
                     onOpen={handleOpen}
                     value={value}
 
-                    onChange={(e) => onClick(e.target.value)}
+                    onChange={onClick}
                 >
-                    <MenuItem value={-1}>
-                        <em></em>
-                    </MenuItem>
+                    <MenuItem value={-1}></MenuItem>
                     <MenuItem value={0}>Sunday</MenuItem>
                     <MenuItem value={1}>Monday</MenuItem>
                     <MenuItem value={2}>Tuesday</MenuItem>
