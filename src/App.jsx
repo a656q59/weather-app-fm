@@ -10,6 +10,8 @@ import useFetchWeatherData from './services/useFetchWeatherData';
 import HourlyForecastContainer from './containers/HourlyForecastContainer';
 import DailyForecastContainer from './containers/DailyForecastContainer';
 
+import iconLoading from "../../assets/images/icon-loading.svg"
+
 const Item = styled(Box)(({ theme }) => ({
   backgroundColor: 'transparent',
   ...theme.typography.body2,
@@ -44,7 +46,12 @@ function App() {
   console.log(weatherInfo?.current, "<------  weatherInfo-------------------")
 
 
-
+  if (loading)
+    return (
+      <Box>
+        <img src={iconLoading} />
+      </Box>
+    )
   return (
     <Grid container >
       <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 15%", }} gap={.1} >
@@ -61,10 +68,10 @@ function App() {
             <BannerTempCard />
             <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
 
-              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(0) * 10} />
-              <Minicard title="Humidity" value={weatherInfo?.current?.relative_humidity_2m} />
-              <Minicard title="Wind" value={weatherInfo?.current?.wind_speed_10m.toFixed(0)} />
-              <Minicard title="Precipitation" value={weatherInfo?.current?.precipitation} />
+              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(0) * 10} loading={loading} />
+              <Minicard title="Humidity" value={weatherInfo?.current?.relative_humidity_2m} loading={loading} />
+              <Minicard title="Wind" value={weatherInfo?.current?.wind_speed_10m.toFixed(0)} loading={loading} />
+              <Minicard title="Precipitation" value={weatherInfo?.current?.precipitation} loading={loading} />
 
 
 
