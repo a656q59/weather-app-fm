@@ -9,6 +9,7 @@ export default function HourlyForecastContainer({ data }) {
     // data.hourly.time.map(item =>)
     const [value, setValue] = useState(0);
     const handleChange = (value) => {
+        console.log(value, "<-----------value")
         setValue(value)
     }
     useEffect(() => {

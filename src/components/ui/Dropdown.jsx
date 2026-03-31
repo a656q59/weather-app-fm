@@ -43,7 +43,7 @@ export default function Dropdown({ value = -1, onClick }) {
                     onOpen={handleOpen}
                     value={value}
 
-                    onChange={onClick}
+                    onChange={(e) => onClick(e.target.value)}
                 >
                     <MenuItem value={-1}></MenuItem>
                     <MenuItem value={0}>Sunday</MenuItem>
