@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Button from '@mui/material/Button';
-import { InputLabel, MenuItem } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 export default function Dropdown({ value = -1, onClick }) {
 
