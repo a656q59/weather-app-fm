@@ -43,7 +43,7 @@ const Item2 = styled(Typography)(({ theme }) => ({
 
 function App() {
   const { weatherInfo, loading, error } = useFetchWeatherData();
-  console.log(weatherInfo?.current, "<------  weatherInfo-------------------")
+  console.log(weatherInfo, "<------  weatherInfo-------------------")
 
 
   if (loading)
