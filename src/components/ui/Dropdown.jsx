@@ -13,7 +13,7 @@ export default function Dropdown({ value = -1, onClick }) {
     }
 
 
-
+    console.log("ifo")
     const [open, setOpen] = useState(false);
 
     return (
