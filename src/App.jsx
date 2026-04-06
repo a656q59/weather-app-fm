@@ -53,7 +53,7 @@ function App() {
     )
   return (
     <Grid container >
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 15%", }} gap={.1} >
+      <Grid container sx={{ backgroundColor: "neutral.900", height: "100vh", width: "100vw", color: "white", padding: "0vh 15%", border: "2px solid red" }} gap={.1} >
         <NavBar />
 
         <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", }}>
