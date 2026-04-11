@@ -20,7 +20,7 @@ export default function DailyForecastCard({ loading, img, day = "Tue", minTemp =
                 borderRadius: "10px",
                 height: "100%",
                 border: "2px solid red",
-                width: "100%"
+
 
 
             })}

@@ -20,7 +20,7 @@ export default function DailyForecastContainer({ data, loading }) {
                 borderRadius: "30px",
                 height: "100%",
                 marginLeft: "3px",
-                // padding: "0px 22px",
+                border: "2px solid red",
                 backgroundColor: "transparent",
                 width: "100%",
                 justifyContent: "space-between"
@@ -31,7 +31,7 @@ export default function DailyForecastContainer({ data, loading }) {
                     Daily forecast
                 </Typography>
             </Grid>
-            <Grid item gap={4} sx={{ display: "flex", flexDirection: "row", height: "auto", }}>
+            <Grid item sx={{ display: "flex", flexDirection: "row", height: "auto", border: "2px solid red" }} gap={1}>
 
                 {data?.daily?.time?.map((t, i) => {
                     return (
