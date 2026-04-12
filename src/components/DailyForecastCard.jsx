@@ -19,7 +19,6 @@ export default function DailyForecastCard({ loading, img, day = "Tue", minTemp =
                 backgroundColor: "neutral.800",
                 borderRadius: "10px",
                 height: "100%",
-                border: "2px solid red",
 
 
 
