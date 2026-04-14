@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function DailyForecastCard({ loading, img, day = "Tue", minTemp = "20", maxTemp = "30" }) {
 
-    console.log(day, "<-----------day")
     if (loading) return <Box
         sx={{
             color: "white",
