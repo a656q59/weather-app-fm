@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 
 export default function DailyForecastCard({ loading, img, day = "Tue", minTemp = "20", maxTemp = "30" }) {
-
+ console.log("first")
     if (loading) return <Box
         sx={{
             color: "white",
