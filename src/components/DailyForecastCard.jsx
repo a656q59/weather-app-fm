@@ -14,7 +14,7 @@ export default function DailyForecastCard({ loading, img, day = "Tue", minTemp =
 
                 flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "space-around",
                 padding: "10px 25px",
                 backgroundColor: "neutral.800",
                 borderRadius: "10px",
