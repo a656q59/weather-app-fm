@@ -5,7 +5,7 @@ export default function DailyForecastCard({ loading, img, day = "Tue", minTemp =
     if (loading) return <Box
         sx={{
             color: "white",
-            border: "2px solid red"
+            border: "2px solid blue"
         }}>loading...</Box>
     return (
         <Box
