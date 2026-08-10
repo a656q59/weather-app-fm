@@ -1,142 +1,254 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import {
   Autocomplete,
   TextField,
   Button,
   Box,
-  CircularProgress
+  CircularProgress,
+  InputAdornment,
 } from "@mui/material";
 import axios from "axios";
 import debounce from "lodash/debounce";
+import searchIcon from "../assets/images/icon-search.svg";
 
-export default function SearchBox() {
+const GEOCODE_URL = "https://geocoding-api.open-meteo.com/v1/search";
+
+function getPlaceLabel(place) {
+  if (!place) return "";
+  return [place.name, place.admin1, place.country].filter(Boolean).join(", ");
+}
+
+export default function SearchBox({ onSearch }) {
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [searching, setSearching] = useState(false);
+  const abortRef = useRef(null);
 
-  // 🔹 Fetch places from Nominatim
   const fetchPlaces = async (query) => {
-    if (!query) return;
+    const trimmed = query.trim();
+    if (trimmed.length < 2) {
+      setOptions([]);
+      setLoading(false);
+      return;
+    }
+
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     setLoading(true);
 
     try {
-      const response = await axios.get(
-        "https://nominatim.openstreetmap.org/search",
-        {
-          params: {
-            q: query,
-            format: "json",
-            addressdetails: 1,
-            limit: 5
-          },
-          headers: {
-            "Accept-Language": "en"
-          }
-        }
-      );
+      const response = await axios.get(GEOCODE_URL, {
+        params: {
+          name: trimmed,
+          count: 5,
+          language: "en",
+          format: "json",
+        },
+        signal: controller.signal,
+      });
 
-      setOptions(response.data);
+      setOptions(response.data?.results ?? []);
     } catch (error) {
-      console.error("Error fetching places:", error);
+      if (!axios.isCancel(error) && error.name !== "CanceledError") {
+        console.error("Error fetching places:", error);
+        setOptions([]);
+      }
     } finally {
-      setLoading(false);
+      if (!controller.signal.aborted) {
+        setLoading(false);
+      }
     }
   };
 
-  // 🔹 Debounce wrapper (created once)
   const debouncedFetch = useMemo(
-    () => debounce((query) => fetchPlaces(query), 500),
-    []
+    () => debounce((query) => fetchPlaces(query), 400),
+    [],
   );
 
-  // 🔹 Cleanup to avoid memory leaks
   useEffect(() => {
     return () => {
       debouncedFetch.cancel();
+      abortRef.current?.abort();
     };
   }, [debouncedFetch]);
 
-  // 🔹 Handle Search Button
+  const resolvePlace = async () => {
+    if (selectedPlace?.latitude != null && selectedPlace?.longitude != null) {
+      return selectedPlace;
+    }
+
+    const query = inputValue.trim();
+    if (!query) return null;
+
+    const response = await axios.get(GEOCODE_URL, {
+      params: {
+        name: query,
+        count: 1,
+        language: "en",
+        format: "json",
+      },
+    });
+
+    return response.data?.results?.[0] ?? null;
+  };
+
   const handleSearch = async () => {
-    const query = selectedPlace?.display_name || inputValue;
-    if (!query) return;
+    setSearching(true);
 
     try {
-      const response = await axios.get(
-        "https://nominatim.openstreetmap.org/search",
-        {
-          params: {
-            q: query,
-            format: "json",
-            limit: 1
-          }
-        }
-      );
+      const place = await resolvePlace();
+      if (!place) return;
 
-      if (response.data.length > 0) {
-        const place = response.data[0];
-        setResult({
-          lat: place.lat,
-          lon: place.lon
-        });
-      }
+      const payload = {
+        name: getPlaceLabel(place),
+        lat: place.latitude,
+        lon: place.longitude,
+      };
+
+      onSearch?.(payload);
     } catch (error) {
       console.error("Error fetching coordinates:", error);
+    } finally {
+      setSearching(false);
     }
   };
 
   return (
-    <Box sx={{ width: 600 }}>
-      <Box sx={{ display: "flex", gap: 1.5, }}>
+    <Box sx={{ width: "100%", maxWidth: 600 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1.5,
+          alignItems: "stretch",
+          flexDirection: { xs: "column", sm: "row" },
+        }}
+      >
         <Autocomplete
           fullWidth
           options={options}
-          getOptionLabel={(option) => option.display_name || ""}
+          filterOptions={(x) => x}
+          getOptionLabel={getPlaceLabel}
+          isOptionEqualToValue={(option, value) =>
+            option.id === value.id &&
+            option.latitude === value.latitude &&
+            option.longitude === value.longitude
+          }
           loading={loading}
-          onInputChange={(event, value) => {
+          value={selectedPlace}
+          inputValue={inputValue}
+          onInputChange={(_event, value, reason) => {
             setInputValue(value);
-            debouncedFetch(value); // ✅ use debounced function
+            if (reason === "input") {
+              debouncedFetch(value);
+            }
+            if (reason === "clear") {
+              setOptions([]);
+              setSelectedPlace(null);
+            }
           }}
-          onChange={(event, value) => {
+          onChange={(_event, value) => {
             setSelectedPlace(value);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              handleSearch();
+            }
+          }}
+          slotProps={{
+            paper: {
+              sx: {
+                backgroundColor: "neutral.800",
+                color: "neutral.0",
+                mt: 1,
+                borderRadius: "12px",
+              },
+            },
           }}
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search places"
+              placeholder="Search for a city, e.g., New York"
               variant="outlined"
               sx={{
                 backgroundColor: "neutral.800",
                 borderRadius: "12px",
-                color: "common.white"
+                "& .MuiOutlinedInput-root": {
+                  color: "neutral.0",
+                  borderRadius: "12px",
+                  minHeight: 56,
+                  pr: 1,
+                  "& fieldset": {
+                    borderColor: "transparent",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "neutral.600",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "primary.main",
+                  },
+                },
+                "& .MuiInputBase-input::placeholder": {
+                  color: "neutral.300",
+                  opacity: 1,
+                },
               }}
               InputProps={{
                 ...params.InputProps,
+                startAdornment: (
+                  <InputAdornment position="start" sx={{ ml: 1, mr: 0.5 }}>
+                    <Box
+                      component="img"
+                      src={searchIcon}
+                      alt=""
+                      sx={{ width: 18, height: 18 }}
+                    />
+                  </InputAdornment>
+                ),
                 endAdornment: (
                   <>
-                    {loading && <CircularProgress size={20} />}
+                    {loading ? (
+                      <CircularProgress color="inherit" size={18} />
+                    ) : null}
                     {params.InputProps.endAdornment}
                   </>
-                )
+                ),
               }}
             />
           )}
         />
 
-        <Button variant="contained" onClick={handleSearch} sx={{ borderRadius: "12px", padding: "0px 50px" }}>
-          Search
+        <Button
+          variant="contained"
+          onClick={handleSearch}
+          disabled={searching || (!inputValue.trim() && !selectedPlace)}
+          sx={{
+            borderRadius: "12px",
+            px: { xs: 3, sm: 4 },
+            minHeight: 56,
+            width: { xs: "100%", sm: "auto" },
+            flexShrink: 0,
+            textTransform: "none",
+            fontSize: "1rem",
+            fontWeight: 600,
+            boxShadow: "none",
+            "&:hover": {
+              boxShadow: "none",
+              backgroundColor: "primary.dark",
+            },
+          }}
+        >
+          {searching ? (
+            <CircularProgress size={22} color="inherit" />
+          ) : (
+            "Search"
+          )}
         </Button>
       </Box>
-
-      {/* {result && (
-        <Box sx={{ mt: 3 }}>
-          <div><strong>Latitude:</strong> {result.lat}</div>
-          <div><strong>Longitude:</strong> {result.lon}</div>
-        </Box>
-      )} */}
     </Box>
   );
 }

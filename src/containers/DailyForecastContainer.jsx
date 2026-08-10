@@ -1,58 +1,57 @@
-import React, { useEffect } from 'react'
-import HourlyForecastCard from '../components/HourlyForecastCard'
 import { Box, Grid, Typography } from '@mui/material'
 import iconDrizzle from "../assets/images/icon-drizzle.webp";
 import DailyForecastCard from '../components/DailyForecastCard';
 
 export default function DailyForecastContainer({ data, loading }) {
-    const { time = [],
+    const {
         temperature_2m_max = [],
-        temperature_2m_min = [] } = data?.daily || {};
-
-    console.log();
+        temperature_2m_min = []
+    } = data?.daily || {};
 
     return (
-        <Grid container
-            sx={(theme) => ({
+        <Box
+            sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 0,
+                gap: 2,
                 borderRadius: "30px",
-                height: "100%",
                 marginLeft: "3px",
-                border: "2px solid red",
                 backgroundColor: "transparent",
                 width: "100%",
-                justifyContent: "space-between"
-                // height: "35%"
-            })}>
-            <Grid item>
-                <Typography>
-                    Daily forecast
-                </Typography>
-            </Grid>
-            <Grid item sx={{ display: "flex", flexDirection: "row", height: "auto", border: "2px solid red" }} gap={1}>
+                minWidth: 0,
+                boxSizing: "border-box",
+            }}
+        >
+            <Typography>
+                Daily forecast
+            </Typography>
 
-                {data?.daily?.time?.map((t, i) => {
-                    return (
-                        <Grid sx={{ width: "100%" }} >
-                            <DailyForecastCard
-                                key={i}
-                                loading={loading}
-                                img={iconDrizzle}
-                                day={new Date(t).toLocaleDateString("en-US", { weekday: "long" }).substring(0, 3)}
-                                minTemp={temperature_2m_min[i].toFixed(0)}
-                                maxTemp={temperature_2m_max[i].toFixed(0)}
-                            />
-                        </Grid>
-                    );
-                })}
-
-            </Grid>
-
-
-
-
-        </Grid >
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateColumns: {
+                        xs: "repeat(3, minmax(0, 1fr))",
+                        sm: "repeat(4, minmax(0, 1fr))",
+                        md: "repeat(7, minmax(0, 1fr))",
+                    },
+                    gap: 1,
+                    width: "100%",
+                    minWidth: 0,
+                    boxSizing: "border-box",
+                }}
+            >
+                {data?.daily?.time?.map((t, i) => (
+                    <Box key={i} sx={{ minWidth: 0, width: "100%" }}>
+                        <DailyForecastCard
+                            loading={loading}
+                            img={iconDrizzle}
+                            day={new Date(t).toLocaleDateString("en-US", { weekday: "long" }).substring(0, 3)}
+                            minTemp={temperature_2m_min[i].toFixed(0)}
+                            maxTemp={temperature_2m_max[i].toFixed(0)}
+                        />
+                    </Box>
+                ))}
+            </Box>
+        </Box>
     )
 }

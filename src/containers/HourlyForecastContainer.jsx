@@ -9,14 +9,12 @@ export default function HourlyForecastContainer({ data }) {
     // data.hourly.time.map(item =>)
     const [value, setValue] = useState(0);
     const handleChange = (value) => {
-        console.log(value, "<-----------value")
         setValue(value)
     }
     useEffect(() => {
         setValue(data?.hourly?.time[0].getDay())
     }, [data]);
 
-    // console.log(data?.hourly?.time[0].getDay(), "<----------------------")
     return (
         <Grid container
             sx={(theme) => ({
@@ -32,7 +30,8 @@ export default function HourlyForecastContainer({ data }) {
             <Box sx={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                alignItems: "center"
             }}>
                 <Typography>
                     Hourly Forecast

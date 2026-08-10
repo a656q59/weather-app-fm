@@ -1,148 +1,164 @@
-import { Box, Grid, Paper, Typography } from '@mui/material'
-import './App.css'
-import NavBar from './components/NavBar'
-import styled from '@emotion/styled';
-import SearchBox from './components/SearchBox';
-import Minicard from './components/Minicard';
-import BannerTempCard from './components/BannerTempCard';
-import HourlyForecastCard from './components/HourlyForecastCard';
-import useFetchWeatherData from './services/useFetchWeatherData';
-import HourlyForecastContainer from './containers/HourlyForecastContainer';
-import DailyForecastContainer from './containers/DailyForecastContainer';
+import { Box, Grid } from "@mui/material";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import styled from "@emotion/styled";
+import SearchBox from "./components/SearchBox";
+import Minicard from "./components/Minicard";
+import BannerTempCard from "./components/BannerTempCard";
+import useFetchWeatherData from "./services/useFetchWeatherData";
+import HourlyForecastContainer from "./containers/HourlyForecastContainer";
+import DailyForecastContainer from "./containers/DailyForecastContainer";
 
-import iconLoading from "../../assets/images/icon-loading.svg"
+import iconLoading from "../../assets/images/icon-loading.svg";
 
 const Item = styled(Box)(({ theme }) => ({
-  backgroundColor: 'transparent',
+  backgroundColor: "transparent",
   ...theme.typography.body2,
   display: "flex",
-  fontSize: "30px",
   letterSpacing: ".02rem",
   justifyContent: "center",
   padding: theme.spacing(1),
   color: "neutral.0",
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
+  width: "100%",
+  [theme.breakpoints.up("xs")]: {
+    fontSize: "22px",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "30px",
+  },
+  ...theme.applyStyles("dark", {
+    backgroundColor: "#1A2027",
   }),
 }));
-
-const Item2 = styled(Typography)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: (theme.vars ?? theme).palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
-
-
-
-
 
 function App() {
   const { weatherInfo, loading, error } = useFetchWeatherData();
 
-
   if (loading)
     return (
-      <Box>
-        <img src={iconLoading} />
+      <Box
+        sx={{
+          minHeight: "100vh",
+          width: "100%",
+          backgroundColor: "neutral.900",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <img src={iconLoading} alt="Loading weather" />
       </Box>
-    )
+    );
+
   return (
-    <Grid container >
-      <Grid container sx={{ backgroundColor: "neutral.900", height: "100%", width: "100vw", color: "white", padding: "0vh 15%", border: "2px solid green" }} gap={.1} >
+    <Box
+      sx={{
+        backgroundColor: "neutral.900",
+        minHeight: "100vh",
+        width: "100%",
+        color: "white",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Grid
+        container
+        sx={{
+          width: "100%",
+          maxWidth: "1740px",
+          px: { xs: 2.5, sm: 4, md: 6, lg: "15%" },
+          py: { xs: 2, md: 0 },
+          gap: { xs: 2, md: 0.1 },
+          boxSizing: "border-box",
+        }}
+      >
         <NavBar />
 
-        <Grid size={12} sx={{ padding: "0px", display: "flex", flexDirection: "column", }}>
-          <Item>How's the sky looking today? </Item>
-          <Item> <SearchBox /> </Item>
-
+        <Grid
+          size={12}
+          sx={{
+            padding: 0,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Item>How's the sky looking today?</Item>
+          <Item sx={{ maxWidth: "100%" }}>
+            <Box sx={{ width: "100%", maxWidth: 600 }}>
+              <SearchBox />
+            </Box>
+          </Item>
         </Grid>
 
-        <Grid size={12} sx={{ display: "flex", flexDirection: "row", alignItems: "center", }} gap={1} >
-          <Grid size={8} sx={{ display: "flex", flexDirection: "column", alignItems: "start", height: "100%", padding: "14px 10px", }} gap={3}>
+        <Grid
+          container
+          size={12}
+          spacing={{ xs: 2, md: 1 }}
+          sx={{
+            alignItems: {
+              xs: "stretch",
+              md: "flex-start",
+            },
+          }}
+        >
+          <Grid
+            size={{ xs: 12, md: 8 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "100%",
+              py: { xs: 1, md: "0px" },
+              px: { xs: 0, md: "10px" },
+            }}
+          >
             <BannerTempCard />
-            <Box size={12} sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", }} gap={3}>
-
-              <Minicard title="Feels Like" value={weatherInfo?.current?.apparent_temperature.toFixed(0) * 10} loading={loading} />
-              <Minicard title="Humidity" value={weatherInfo?.current?.relative_humidity_2m} loading={loading} />
-              <Minicard title="Wind" value={weatherInfo?.current?.wind_speed_10m.toFixed(0)} loading={loading} />
-              <Minicard title="Precipitation" value={weatherInfo?.current?.precipitation} loading={loading} />
-
-
-
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(2, minmax(0, 1fr))",
+                  sm: "repeat(4, minmax(0, 1fr))",
+                },
+                width: "100%",
+                gap: { xs: 1.5, sm: 3 },
+              }}
+            >
+              <Minicard
+                title="Feels Like"
+                value={
+                  weatherInfo?.current?.apparent_temperature.toFixed(0) * 10
+                }
+                loading={loading}
+              />
+              <Minicard
+                title="Humidity"
+                value={weatherInfo?.current?.relative_humidity_2m}
+                loading={loading}
+              />
+              <Minicard
+                title="Wind"
+                value={weatherInfo?.current?.wind_speed_10m.toFixed(0)}
+                loading={loading}
+              />
+              <Minicard
+                title="Precipitation"
+                value={weatherInfo?.current?.precipitation}
+                loading={loading}
+              />
             </Box>
 
-
-
             <DailyForecastContainer data={weatherInfo} loading={loading} />
-
-
-
-
           </Grid>
-          <Grid size={4} >
+
+          <Grid size={{ xs: 12, md: 4 }}>
             <HourlyForecastContainer data={weatherInfo} />
-
           </Grid>
-
         </Grid>
-
       </Grid>
-    </Grid>
-  )
+    </Box>
+  );
 }
 
-export default App
-
-
-
-
-
-// -----------------------------------------------------
-
-
-// Units
-
-// Switch to Imperial/Metric
-
-// Temperature
-
-// Celsius (°C)
-// Fahrenheit (°F)
-
-// Wind Speed
-
-// km/h
-// mph
-
-// Precipitation
-
-// Millimeters (mm)
-// Inches (in)
-
-// How's the sky looking today?
-
-// Search for a city, e.g., New York
-// Search
-
-// Feels like
-{/* <!-- Insert temperature here --> */ }
-
-// Humidity
-{/* <!-- Insert humidity here --> */ }
-
-// Wind
-{/* <!-- Insert wind here -->    */ }
-
-// Precipitation
-{/* <!-- Insert precipitation here --> */ }
-
-// Daily forecast
-{/* <!-- Insert daily forecast for the next 7 days here --> */ }
-
-// Hourly forecast
-{/* <!-- Insert hourly forecast for the selected day here --> */ }
+export default App;
