@@ -105,10 +105,10 @@ export default function SearchBox({ onSearch }) {
 
       const payload = {
         name: getPlaceLabel(place),
-        lat: place.latitude,
-        lon: place.longitude,
+        lat: place.latitude.toFixed(2),
+        lon: place.longitude.toFixed(2),
       };
-
+      console.log(payload, "<-------------payload");
       onSearch?.(payload);
     } catch (error) {
       console.error("Error fetching coordinates:", error);

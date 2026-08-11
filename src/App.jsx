@@ -39,6 +39,10 @@ function App() {
     setValue(value);
   };
 
+  const handleSearch = (payload) => {
+    console.log(payload, "<-------------payload");
+  };
+
   useEffect(() => {
     setValue(weatherInfo?.hourly?.time[0].getDay());
   }, [weatherInfo]);
@@ -95,7 +99,7 @@ function App() {
           <Item>How's the sky looking today?</Item>
           <Item sx={{ maxWidth: "100%" }}>
             <Box sx={{ width: "100%", maxWidth: 600 }}>
-              <SearchBox />
+              <SearchBox onSearch={handleSearch} />
             </Box>
           </Item>
         </Grid>
