@@ -10,6 +10,7 @@ import HourlyForecastContainer from "./containers/HourlyForecastContainer";
 import DailyForecastContainer from "./containers/DailyForecastContainer";
 
 import iconLoading from "../../assets/images/icon-loading.svg";
+import { useEffect, useState } from "react";
 
 const Item = styled(Box)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -33,6 +34,14 @@ const Item = styled(Box)(({ theme }) => ({
 
 function App() {
   const { weatherInfo, loading, error } = useFetchWeatherData();
+  const [value, setValue] = useState(0);
+  const handleChange = (value) => {
+    setValue(value);
+  };
+
+  useEffect(() => {
+    setValue(weatherInfo?.hourly?.time[0].getDay());
+  }, [weatherInfo]);
 
   if (loading)
     return (
@@ -153,7 +162,11 @@ function App() {
           </Grid>
 
           <Grid size={{ xs: 12, md: 4 }}>
-            <HourlyForecastContainer data={weatherInfo} />
+            <HourlyForecastContainer
+              data={weatherInfo}
+              value={value}
+              onClick={handleChange}
+            />
           </Grid>
         </Grid>
       </Grid>
