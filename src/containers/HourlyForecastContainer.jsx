@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import HourlyForecastCard from "../components/HourlyForecastCard";
 import { Box, Grid, Typography } from "@mui/material";
-import iconDrizzle from "../assets/images/icon-drizzle.webp";
+import iconDrizzle from "../assets/images/weatherIcons/icon-drizzle.webp";
 import Dropdown from "../components/ui/Dropdown";
+import { getWeatherIcon } from "../helpers/getWeatherIcon";
 
 export default function HourlyForecastContainer({ data, value, onClick }) {
   const { time = [], apparent_temperature = [] } = data?.hourly || {};
   // data.hourly.time.map(item =>)
-
 
   return (
     <Grid
@@ -59,10 +59,11 @@ export default function HourlyForecastContainer({ data, value, onClick }) {
         if (new Date(t).getDay() !== value) return;
         if (new Date(t).getHours() < 15 || new Date(t).getHours() > 22) return;
         const hour = new Date(t).getHours();
+        const weatherCode = data?.hourly?.weather_code[i];
         return (
           <HourlyForecastCard
             key={i}
-            img={iconDrizzle}
+            img={getWeatherIcon(weatherCode)}
             hour={hour > 12 ? hour - 12 : hour}
             tempurature={apparent_temperature[i].toFixed(0)}
           />

@@ -95,6 +95,7 @@ export default function SearchBox({ onSearch }) {
 
     return response.data?.results?.[0] ?? null;
   };
+  // console.log(selectedPlace, "<-------------selectedPlace");
 
   const handleSearch = async () => {
     setSearching(true);
