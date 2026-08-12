@@ -1,8 +1,8 @@
 import image_large from "../assets/images/bg-today-large.svg";
 import image_small from "../assets/images/bg-today-small.svg";
 import { Box, Button, Typography } from "@mui/material";
-
-export default function BannerTempCard() {
+[];
+export default function BannerTempCard({ title, tempurature }) {
   return (
     <Box
       sx={{
@@ -37,10 +37,10 @@ export default function BannerTempCard() {
         }}
       >
         <Box>
-          <Typography>Berlin, Germany</Typography>
+          <Typography>{title}</Typography>
           <Typography>{new Date().toDateString()}</Typography>
         </Box>
-        <Typography variant="h2">20</Typography>
+        <Typography variant="h2">{tempurature}</Typography>
       </Box>
     </Box>
 
