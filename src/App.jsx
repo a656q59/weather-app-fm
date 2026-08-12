@@ -11,6 +11,7 @@ import DailyForecastContainer from "./containers/DailyForecastContainer";
 
 import iconLoading from "../../assets/images/icon-loading.svg";
 import { useEffect, useState } from "react";
+import { getUnits } from "./helpers/getUnits";
 
 const Item = styled(Box)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -33,15 +34,27 @@ const Item = styled(Box)(({ theme }) => ({
 }));
 
 function App() {
-  const { weatherInfo, loading, error } = useFetchWeatherData();
+  const [searchPayload, setSearchPayload] = useState({
+    title: "Berlin, Germany",
+    lat: 33.42,
+    lon: 32.51,
+  });
+
+  const { weatherInfo, loading, error } = useFetchWeatherData(searchPayload);
   const [value, setValue] = useState(0);
+  const [title, setTitle] = useState("Berlin, Germany");
   const handleChange = (value) => {
     setValue(value);
   };
-
   const handleSearch = (payload) => {
-    console.log(payload, "<-------------payload");
+    setSearchPayload({
+      title: payload.name,
+      lat: payload.lat,
+      lon: payload.lon,
+    });
+    setTitle(payload.name);
   };
+  console.log(weatherInfo, "<-------------weatherInfo");
 
   useEffect(() => {
     setValue(weatherInfo?.hourly?.time[0].getDay());
@@ -126,7 +139,13 @@ function App() {
               px: { xs: 0, md: "10px" },
             }}
           >
-            <BannerTempCard />
+            <BannerTempCard
+              title={title}
+              tempurature={
+                weatherInfo?.current?.temperature_2m?.toFixed(0) +
+                getUnits("Temperature")
+              }
+            />
             <Box
               sx={{
                 display: "grid",
@@ -140,14 +159,12 @@ function App() {
             >
               <Minicard
                 title="Feels Like"
-                value={
-                  weatherInfo?.current?.apparent_temperature.toFixed(0) * 10
-                }
+                value={weatherInfo?.current?.apparent_temperature.toFixed(0)}
                 loading={loading}
               />
               <Minicard
                 title="Humidity"
-                value={weatherInfo?.current?.relative_humidity_2m}
+                value={weatherInfo?.current?.relative_humidity_2m.toFixed(0)}
                 loading={loading}
               />
               <Minicard
