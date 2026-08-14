@@ -106,16 +106,6 @@ const useFetchWeatherData = (searchPayload) => {
     fetchWeatherInfo();
   }, [searchPayload]);
 
-  // The 'weatherData' object now contains a simple structure, with arrays of datetimes and weather information
-  // console.log(
-  //     `\nCurrent time: ${weatherData.current.time}\n`,
-  //     `\nCurrent wind_speed_10m: ${weatherData.current.wind_speed_10m}`,
-  //     `\nCurrent apparent_temperature: ${weatherData.current.apparent_temperature}`,
-  //     `\nCurrent precipitation: ${weatherData.current.precipitation}`,
-  //     `\nCurrent relative_humidity_2m: ${weatherData.current.relative_humidity_2m}`,
-  // );
-  // console.log("\nHourly data:\n", weatherData.hourly)
-
   return { weatherInfo, loading, error };
 };
 
