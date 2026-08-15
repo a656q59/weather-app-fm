@@ -26,6 +26,7 @@ const useFetchWeatherData = (searchPayload) => {
     const url = "https://api.open-meteo.com/v1/forecast";
 
     const fetchWeatherInfo = async () => {
+      setLoading(true);
       try {
         const responses = await fetchWeatherApi(url, params);
         const response = responses[0];

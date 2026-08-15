@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import styled from "@emotion/styled";
@@ -71,7 +71,17 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <img src={iconLoading} alt="Loading weather" />
+        <Box
+          sx={{
+            width: "50%",
+            height: "50%",
+            backgroundColor: "neutral.800",
+            borderRadius: "10px",
+            textColor: "white",
+          }}
+        >
+          <Typography variant="h6">Loading weather...</Typography>
+        </Box>
       </Box>
     );
 
@@ -145,6 +155,7 @@ function App() {
                 getUnits("Temperature")
               }
             />
+
             <Box
               sx={{
                 display: "grid",

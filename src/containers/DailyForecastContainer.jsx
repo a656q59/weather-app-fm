@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import iconDrizzle from "../assets/images/weatherIcons/icon-drizzle.webp";
 import DailyForecastCard from "../components/DailyForecastCard";
+import { getWeatherIcon } from "../helpers/getWeatherIcon";
 
 export default function DailyForecastContainer({ data, loading }) {
   const { temperature_2m_max = [], temperature_2m_min = [] } =
@@ -36,19 +37,23 @@ export default function DailyForecastContainer({ data, loading }) {
           boxSizing: "border-box",
         }}
       >
-        {data?.daily?.time?.map((t, i) => (
-          <Box key={i} sx={{ minWidth: 0, width: "100%" }}>
-            <DailyForecastCard
-              loading={loading}
-              img={iconDrizzle}
-              day={new Date(t)
-                .toLocaleDateString("en-US", { weekday: "long" })
-                .substring(0, 3)}
-              minTemp={temperature_2m_min[i].toFixed(0)}
-              maxTemp={temperature_2m_max[i].toFixed(0)}
-            />
-          </Box>
-        ))}
+        {data?.daily?.time?.map((t, i) => {
+          const weatherCode = data?.daily?.weather_code[i];
+
+          return (
+            <Box key={i} sx={{ minWidth: 0, width: "100%" }}>
+              <DailyForecastCard
+                loading={loading}
+                img={getWeatherIcon(weatherCode)}
+                day={new Date(t)
+                  .toLocaleDateString("en-US", { weekday: "long" })
+                  .substring(0, 3)}
+                minTemp={temperature_2m_min[i].toFixed(0)}
+                maxTemp={temperature_2m_max[i].toFixed(0)}
+              />
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );
