@@ -95,7 +95,6 @@ export default function SearchBox({ onSearch }) {
 
     return response.data?.results?.[0] ?? null;
   };
-  // console.log(selectedPlace, "<-------------selectedPlace");
 
   const handleSearch = async () => {
     setSearching(true);
@@ -109,7 +108,6 @@ export default function SearchBox({ onSearch }) {
         lat: place.latitude.toFixed(2),
         lon: place.longitude.toFixed(2),
       };
-      console.log(payload, "<-------------payload");
       onSearch?.(payload);
     } catch (error) {
       console.error("Error fetching coordinates:", error);
