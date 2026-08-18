@@ -12,7 +12,7 @@ import dropdown from "../assets/images/icon-dropdown.svg";
 
 export default function ButtonAppBar() {
   const theme = useTheme();
-
+  console.log(theme);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
