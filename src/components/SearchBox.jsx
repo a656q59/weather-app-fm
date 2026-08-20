@@ -1,14 +1,14 @@
-import { useState, useMemo, useEffect, useRef } from "react";
 import {
   Autocomplete,
-  TextField,
-  Button,
   Box,
+  Button,
   CircularProgress,
   InputAdornment,
+  TextField,
 } from "@mui/material";
 import axios from "axios";
 import debounce from "lodash/debounce";
+import { useEffect, useMemo, useRef, useState } from "react";
 import searchIcon from "../assets/images/icon-search.svg";
 
 const GEOCODE_URL = "https://geocoding-api.open-meteo.com/v1/search";
