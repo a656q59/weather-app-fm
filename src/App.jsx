@@ -54,7 +54,7 @@ function App() {
     });
     setTitle(payload.name);
   };
-
+  console.log(weatherInfo);
   useEffect(() => {
     setValue(weatherInfo?.hourly?.time[0].getDay());
   }, [weatherInfo]);
