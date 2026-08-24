@@ -79,7 +79,7 @@ function App() {
             textColor: "white",
           }}
         >
-          <Typography variant="h6">Loading weather data...</Typography>
+          <Typography variant="h6">Loading weather...</Typography>
         </Box>
       </Box>
     );
