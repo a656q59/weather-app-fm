@@ -1,34 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
-import { getUnits } from "../helpers/getUnits";
+import { getUnits, METRIC_UNITS } from "../helpers/getUnits";
 
-export default function Minicard({ title, value, loading }) {
-  if (loading) return;
+export default function Minicard({ title, value, loading, units = METRIC_UNITS }) {
+  if (loading) return null;
 
-  const units = getUnits(title);
-  <Box
-    sx={(theme) => ({
-      backgroundColor: theme.palette.neutral.main,
-      display: "flex",
-      borderRadius: "13px",
-      flexDirection: "column",
-      padding: "14px 20px",
-      // maxWidth: "190px",
-      width: "100%",
-    })}
-  >
-    <Typography sx={{ fontSize: "10px", marginBottom: "7px" }}>
-      {title}
-    </Typography>
-
-    <Typography
-      sx={{
-        color: "white",
-      }}
-    >
-      --
-    </Typography>
-  </Box>;
+  const unitLabel = getUnits(title, units);
 
   return (
     <Box
@@ -38,14 +14,15 @@ export default function Minicard({ title, value, loading }) {
         borderRadius: "13px",
         flexDirection: "column",
         padding: "14px 20px",
-        // maxWidth: "190px",
         width: "100%",
       })}
     >
-      <Box sx={{ fontSize: "10px", marginBottom: "7px" }}>{title}</Box>
+      <Typography sx={{ fontSize: "10px", marginBottom: "7px" }}>
+        {title}
+      </Typography>
       <Box>
         {value}
-        {units}
+        {unitLabel}
       </Box>
     </Box>
   );
