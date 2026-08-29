@@ -1,7 +1,7 @@
 import image_large from "../assets/images/bg-today-large.svg";
 import image_small from "../assets/images/bg-today-small.svg";
-import { Box, Button, Typography } from "@mui/material";
-[];
+import { Box, Typography } from "@mui/material";
+
 export default function BannerTempCard({ title, tempurature }) {
   return (
     <Box
