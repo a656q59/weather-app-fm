@@ -9,9 +9,8 @@ import useFetchWeatherData from "./services/useFetchWeatherData";
 import HourlyForecastContainer from "./containers/HourlyForecastContainer";
 import DailyForecastContainer from "./containers/DailyForecastContainer";
 
-import iconLoading from "../../assets/images/icon-loading.svg";
 import { useEffect, useState } from "react";
-import { getUnits } from "./helpers/getUnits";
+import { getUnits, METRIC_UNITS } from "./helpers/getUnits";
 
 const Item = styled(Box)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -40,7 +39,11 @@ function App() {
     lon: 32.51,
   });
 
-  const { weatherInfo, loading, error } = useFetchWeatherData(searchPayload);
+  const [units, setUnits] = useState(METRIC_UNITS);
+  const { weatherInfo, loading, error } = useFetchWeatherData(
+    searchPayload,
+    units,
+  );
   const [value, setValue] = useState(0);
   const [title, setTitle] = useState("Berlin, Germany");
   const handleChange = (value) => {
@@ -53,6 +56,9 @@ function App() {
       lon: payload.lon,
     });
     setTitle(payload.name);
+  };
+  const handleUnitsChange = (nextUnits) => {
+    setUnits(nextUnits);
   };
   useEffect(() => {
     setValue(weatherInfo?.hourly?.time[0].getDay());
@@ -106,7 +112,7 @@ function App() {
           boxSizing: "border-box",
         }}
       >
-        <NavBar />
+        <NavBar units={units} onUnitsChange={handleUnitsChange} />
 
         <Grid
           size={12}
@@ -151,7 +157,7 @@ function App() {
               title={title}
               tempurature={
                 weatherInfo?.current?.temperature_2m?.toFixed(0) +
-                getUnits("Temperature")
+                getUnits("Temperature", units)
               }
             />
 
@@ -168,23 +174,27 @@ function App() {
             >
               <Minicard
                 title="Feels Like"
-                value={weatherInfo?.current?.apparent_temperature.toFixed(0)}
+                value={weatherInfo?.current?.apparent_temperature?.toFixed(0)}
                 loading={loading}
+                units={units}
               />
               <Minicard
                 title="Humidity"
-                value={weatherInfo?.current?.relative_humidity_2m.toFixed(0)}
+                value={weatherInfo?.current?.relative_humidity_2m?.toFixed(0)}
                 loading={loading}
+                units={units}
               />
               <Minicard
                 title="Wind"
-                value={weatherInfo?.current?.wind_speed_10m.toFixed(0)}
+                value={weatherInfo?.current?.wind_speed_10m?.toFixed(0)}
                 loading={loading}
+                units={units}
               />
               <Minicard
                 title="Precipitation"
                 value={weatherInfo?.current?.precipitation}
                 loading={loading}
+                units={units}
               />
             </Box>
 

@@ -1,17 +1,21 @@
 import { fetchWeatherApi } from "openmeteo";
 import { useEffect, useState } from "react";
 
-const useFetchWeatherData = (searchPayload) => {
+const useFetchWeatherData = (searchPayload, units) => {
   const [weatherInfo, setWeatherInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //   console.log("initial loading value", loading);
-
   useEffect(() => {
+    if (searchPayload?.lat == null || searchPayload?.lon == null) return;
+
     const params = {
-      latitude: searchPayload?.lat,
-      longitude: searchPayload?.lon,
+      latitude: searchPayload.lat,
+      longitude: searchPayload.lon,
+      temperature_unit: units?.temperature ?? "celsius",
+      wind_speed_unit: units?.windSpeed ?? "kmh",
+      precipitation_unit: units?.precipitation ?? "mm",
+      timezone: "auto",
       hourly: ["apparent_temperature", "weather_code"],
       daily: ["temperature_2m_max", "temperature_2m_min", "weather_code"],
       current: [
@@ -27,6 +31,7 @@ const useFetchWeatherData = (searchPayload) => {
 
     const fetchWeatherInfo = async () => {
       setLoading(true);
+      setError(null);
       try {
         const responses = await fetchWeatherApi(url, params);
         const response = responses[0];
@@ -105,7 +110,7 @@ const useFetchWeatherData = (searchPayload) => {
     };
 
     fetchWeatherInfo();
-  }, [searchPayload]);
+  }, [searchPayload, units]);
 
   return { weatherInfo, loading, error };
 };
