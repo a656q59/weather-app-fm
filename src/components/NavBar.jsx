@@ -1,19 +1,12 @@
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material";
-// import MenuIcon from '@mui/icons-material/Menu';
 import logo from "../assets/images/logo.svg";
-import units from "../assets/images/icon-units.svg";
-import dropdown from "../assets/images/icon-dropdown.svg";
+import UnitsMenu from "./UnitsMenu";
 
-export default function ButtonAppBar() {
-  const theme = useTheme();
+export default function NavBar({ units, onUnitsChange }) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, width: "100%" }}>
       <AppBar
         position="static"
         sx={{
@@ -23,46 +16,24 @@ export default function ButtonAppBar() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          boxShadow: "none",
         }}
       >
         <IconButton
           size="large"
-          color="theme.palette.neutral.700"
-          aria-label="menu"
+          aria-label="logo"
           sx={{
             mr: 2,
             flexGrow: 1,
             display: "flex",
             justifyContent: "start",
-            padding: "0px",
+            padding: 0,
           }}
         >
-          <img src={logo} />
+          <Box component="img" src={logo} alt="Weather app logo" />
         </IconButton>
-        <Typography variant="h6" component="div"></Typography>
-        <Button
-          color="neutral"
-          variant="contained"
-          startIcon={<img src={units} />}
-        >
-          <select
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              color: "white",
-              fontSize: "16px",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-            name="units"
-            id="units"
-            value={units}
-            //   onChange={handleUnitsChange}
-          >
-            <option value="metric">Metric</option>
-            <option value="imperial">Imperial</option>
-          </select>
-        </Button>
+
+        <UnitsMenu units={units} onChange={onUnitsChange} />
       </AppBar>
     </Box>
   );
