@@ -48,6 +48,7 @@ export default function UnitsMenu({ units, onChange }) {
   const open = Boolean(anchorEl);
   const metric = isMetricSystem(units);
 
+  console.log(units);
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -129,7 +130,10 @@ export default function UnitsMenu({ units, onChange }) {
 
         {/* Section 2: Temperature / Wind / Precipitation groups */}
         {SECTIONS.map((section, index) => (
-          <Box key={section.key} sx={{ mb: index === SECTIONS.length - 1 ? 0 : 1 }}>
+          <Box
+            key={section.key}
+            sx={{ mb: index === SECTIONS.length - 1 ? 0 : 1 }}
+          >
             <Typography
               sx={{
                 px: 1.5,
