@@ -16,7 +16,7 @@ export const isMetricSystem = (units) =>
   units?.precipitation === METRIC_UNITS.precipitation;
 
 const UNIT_LABELS = {
-  Feels Like: {
+  FeelsLike: {
     celsius: "°",
     fahrenheit: "°",
   },
