@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import styled from "@emotion/styled";
@@ -61,34 +61,10 @@ function App() {
     setUnits(nextUnits);
   };
   useEffect(() => {
-    setValue(weatherInfo?.hourly?.time[0].getDay());
+    if (weatherInfo?.hourly?.time?.[0]) {
+      setValue(weatherInfo.hourly.time[0].getDay());
+    }
   }, [weatherInfo]);
-
-  if (loading)
-    return (
-      <Box
-        sx={{
-          minHeight: "100vh",
-          width: "100%",
-          backgroundColor: "neutral.900",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Box
-          sx={{
-            width: "50%",
-            height: "50%",
-            backgroundColor: "neutral.800",
-            borderRadius: "10px",
-            textColor: "white",
-          }}
-        >
-          <Typography variant="h6">Loading...</Typography>
-        </Box>
-      </Box>
-    );
 
   return (
     <Box
@@ -151,13 +127,17 @@ function App() {
               height: "100%",
               py: { xs: 1, md: "0px" },
               px: { xs: 0, md: "10px" },
+              gap: { xs: 2, md: 3 },
             }}
           >
             <BannerTempCard
+              loading={loading}
               title={title}
               tempurature={
-                weatherInfo?.current?.temperature_2m?.toFixed(0) +
-                getUnits("Temperature", units)
+                weatherInfo?.current?.temperature_2m != null
+                  ? weatherInfo.current.temperature_2m.toFixed(0) +
+                    getUnits("Temperature", units)
+                  : ""
               }
             />
 
@@ -206,6 +186,7 @@ function App() {
               data={weatherInfo}
               value={value}
               onClick={handleChange}
+              loading={loading}
             />
           </Grid>
         </Grid>
