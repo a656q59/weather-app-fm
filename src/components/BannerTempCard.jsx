@@ -1,30 +1,29 @@
 import image_large from "../assets/images/bg-today-large.svg";
 import image_small from "../assets/images/bg-today-small.svg";
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 
-export default function BannerTempCard({ title, tempurature }) {
+export default function BannerTempCard({ title, tempurature, loading }) {
   return (
     <Box
       sx={{
         position: "relative",
         width: "100%",
-        minHeight: "30vh", // full screen hero
+        minHeight: "30vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         borderRadius: "20px",
-
         backgroundImage: {
           xs: `url(${image_small})`,
           lg: `url(${image_large})`,
         },
-        backgroundSize: "cover", // 🔥 never crop
+        backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        backgroundColor: "#000", // fills empty space nicely
+        backgroundColor: "#000",
+        overflow: "hidden",
       }}
     >
-      {/* Overlay Content */}
       <Box
         sx={{
           display: "flex",
@@ -32,48 +31,42 @@ export default function BannerTempCard({ title, tempurature }) {
           justifyContent: "space-between",
           color: "white",
           width: "100%",
-
           px: 2,
         }}
       >
-        <Box>
-          <Typography>{title}</Typography>
-          <Typography>{new Date().toDateString()}</Typography>
-        </Box>
-        <Typography variant="h2">{tempurature}</Typography>
+        {loading ? (
+          <>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+              <Skeleton
+                variant="rounded"
+                width={180}
+                height={28}
+                sx={{ bgcolor: "rgba(255,255,255,0.2)" }}
+              />
+              <Skeleton
+                variant="rounded"
+                width={140}
+                height={20}
+                sx={{ bgcolor: "rgba(255,255,255,0.15)" }}
+              />
+            </Box>
+            <Skeleton
+              variant="rounded"
+              width={96}
+              height={64}
+              sx={{ bgcolor: "rgba(255,255,255,0.2)" }}
+            />
+          </>
+        ) : (
+          <>
+            <Box>
+              <Typography>{title}</Typography>
+              <Typography>{new Date().toDateString()}</Typography>
+            </Box>
+            <Typography variant="h2">{tempurature}</Typography>
+          </>
+        )}
       </Box>
     </Box>
-
-    // <Box
-    //     sx={{
-    //         display: "flex",
-    //         alignItems: "center",
-    //         justifyContent: "space-between",
-    //         border: "2px solid red",
-    //         width: "60%",
-    //         aspectRatio: "16 / 9",
-    //         backgroundImage: {
-    //             xs: `url(${image_small})`,
-    //             lg: `url(${image_large})`,
-    //         },
-    //         backgroundSize: "contain",   // 🔥 Important
-    //         backgroundRepeat: "no-repeat",
-    //         // backgroundPosition: "center",
-    //     }}
-    // >
-    //     <Box>
-    //         <Typography>
-    //             Berlin, Germany
-    //         </Typography>
-    //         <Typography>
-    //             {new Date().toDateString()}
-    //         </Typography>
-
-    //     </Box>
-    //     <Typography variant="h2">
-    //         20
-    //     </Typography>
-
-    // </Box>
   );
 }

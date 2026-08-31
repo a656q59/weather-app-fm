@@ -1,5 +1,4 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Box, Skeleton, Typography } from "@mui/material";
 
 export default function DailyForecastCard({
   loading,
@@ -8,19 +7,62 @@ export default function DailyForecastCard({
   minTemp = "20",
   maxTemp = "30",
 }) {
-  if (loading)
+  if (loading) {
     return (
       <Box
         sx={{
-          color: "white",
-          border: "2px solid green",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-around",
+          px: { xs: 1, sm: 1.5, md: 2 },
+          py: 1.25,
+          backgroundColor: "neutral.800",
+          borderRadius: "10px",
+          height: "100%",
           width: "100%",
+          minWidth: 0,
+          minHeight: 140,
           boxSizing: "border-box",
+          gap: 1.5,
         }}
       >
-        loading...
+        <Skeleton
+          variant="rounded"
+          width={36}
+          height={16}
+          sx={{ bgcolor: "neutral.600" }}
+        />
+        <Skeleton
+          variant="circular"
+          width={40}
+          height={40}
+          sx={{ bgcolor: "neutral.600" }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+            gap: 0.5,
+          }}
+        >
+          <Skeleton
+            variant="rounded"
+            width={28}
+            height={16}
+            sx={{ bgcolor: "neutral.600" }}
+          />
+          <Skeleton
+            variant="rounded"
+            width={28}
+            height={16}
+            sx={{ bgcolor: "neutral.600" }}
+          />
+        </Box>
       </Box>
     );
+  }
 
   return (
     <Box
