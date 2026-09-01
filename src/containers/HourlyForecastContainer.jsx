@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
 import HourlyForecastCard from "../components/HourlyForecastCard";
-import { Box, Grid, Typography } from "@mui/material";
-import iconDrizzle from "../assets/images/weatherIcons/icon-drizzle.webp";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import Dropdown from "../components/ui/Dropdown";
 import { getWeatherIcon } from "../helpers/getWeatherIcon";
 
-export default function HourlyForecastContainer({ data, value, onClick }) {
-  const { time = [], apparent_temperature = [] } = data?.hourly || {};
-  // data.hourly.time.map(item =>)
+const SKELETON_HOURS = 8;
+
+export default function HourlyForecastContainer({
+  data,
+  value,
+  onClick,
+  loading,
+}) {
+  const { apparent_temperature = [] } = data?.hourly || {};
 
   return (
     <Grid
       container
-      sx={(theme) => ({
+      sx={{
         display: "flex",
         flexDirection: "column",
         gap: 2,
@@ -21,7 +25,7 @@ export default function HourlyForecastContainer({ data, value, onClick }) {
         marginLeft: "3px",
         padding: "20px 22px",
         backgroundColor: "neutral.700",
-      })}
+      }}
     >
       <Box
         sx={{
@@ -32,43 +36,37 @@ export default function HourlyForecastContainer({ data, value, onClick }) {
         }}
       >
         <Typography>Hourly Forecast</Typography>
-        <Dropdown value={value} onClick={onClick} />
+        {loading ? (
+          <Skeleton
+            variant="rounded"
+            width={120}
+            height={36}
+            sx={{ bgcolor: "neutral.600", borderRadius: "8px" }}
+          />
+        ) : (
+          <Dropdown value={value} onClick={onClick} />
+        )}
       </Box>
 
-      {/* {Array.from({ length }).map((_, index) => (
-                <HourlyForecastCard
-                    key={index}
-                    values={keys.map((key) => data[key][index])}
-                />
-            ))} */}
-
-      {/* {time.map((t, i) => {
-                const hour = new Date(t).getHours();
-
-                return (
-                    <HourlyForecastCard
-                        key={i}
-                        hour={hour > 12 ? hour - 12 : hour}
-                        tempurature={(temperature[i] * 100).toFixed(2)}
-                    />
-                );
-            })} */}
-
-      {data?.hourly?.time?.map((t, i) => {
-        // console.log(, new Date(t).getDay(), value, "<-------------tempurature")
-        if (new Date(t).getDay() !== value) return;
-        if (new Date(t).getHours() < 15 || new Date(t).getHours() > 22) return;
-        const hour = new Date(t).getHours();
-        const weatherCode = data?.hourly?.weather_code[i];
-        return (
-          <HourlyForecastCard
-            key={i}
-            img={getWeatherIcon(weatherCode)}
-            hour={hour > 12 ? hour - 12 : hour}
-            tempurature={apparent_temperature[i].toFixed(0)}
-          />
-        );
-      })}
+      {loading
+        ? Array.from({ length: SKELETON_HOURS }).map((_, i) => (
+            <HourlyForecastCard key={`hourly-skeleton-${i}`} loading />
+          ))
+        : data?.hourly?.time?.map((t, i) => {
+            if (new Date(t).getDay() !== value) return null;
+            if (new Date(t).getHours() < 15 || new Date(t).getHours() > 22)
+              return null;
+            const hour = new Date(t).getHours();
+            const weatherCode = data?.hourly?.weather_code[i];
+            return (
+              <HourlyForecastCard
+                key={i}
+                img={getWeatherIcon(weatherCode)}
+                hour={hour > 12 ? hour - 12 : hour}
+                tempurature={apparent_temperature[i].toFixed(0)}
+              />
+            );
+          })}
     </Grid>
   );
 }
