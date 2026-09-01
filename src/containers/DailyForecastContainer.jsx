@@ -1,7 +1,8 @@
-import { Box, Grid, Typography } from "@mui/material";
-import iconDrizzle from "../assets/images/weatherIcons/icon-drizzle.webp";
+import { Box, Typography } from "@mui/material";
 import DailyForecastCard from "../components/DailyForecastCard";
 import { getWeatherIcon } from "../helpers/getWeatherIcon";
+
+const SKELETON_DAYS = 7;
 
 export default function DailyForecastContainer({ data, loading }) {
   const { temperature_2m_max = [], temperature_2m_min = [] } =
@@ -37,23 +38,28 @@ export default function DailyForecastContainer({ data, loading }) {
           boxSizing: "border-box",
         }}
       >
-        {data?.daily?.time?.map((t, i) => {
-          const weatherCode = data?.daily?.weather_code[i];
+        {loading
+          ? Array.from({ length: SKELETON_DAYS }).map((_, i) => (
+              <Box key={`daily-skeleton-${i}`} sx={{ minWidth: 0, width: "100%" }}>
+                <DailyForecastCard loading />
+              </Box>
+            ))
+          : data?.daily?.time?.map((t, i) => {
+              const weatherCode = data?.daily?.weather_code[i];
 
-          return (
-            <Box key={i} sx={{ minWidth: 0, width: "100%" }}>
-              <DailyForecastCard
-                loading={loading}
-                img={getWeatherIcon(weatherCode)}
-                day={new Date(t)
-                  .toLocaleDateString("en-US", { weekday: "long" })
-                  .substring(0, 3)}
-                minTemp={temperature_2m_min[i].toFixed(0)}
-                maxTemp={temperature_2m_max[i].toFixed(0)}
-              />
-            </Box>
-          );
-        })}
+              return (
+                <Box key={i} sx={{ minWidth: 0, width: "100%" }}>
+                  <DailyForecastCard
+                    img={getWeatherIcon(weatherCode)}
+                    day={new Date(t)
+                      .toLocaleDateString("en-US", { weekday: "long" })
+                      .substring(0, 3)}
+                    minTemp={temperature_2m_min[i].toFixed(0)}
+                    maxTemp={temperature_2m_max[i].toFixed(0)}
+                  />
+                </Box>
+              );
+            })}
       </Box>
     </Box>
   );
