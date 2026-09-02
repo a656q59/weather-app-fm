@@ -38,6 +38,7 @@ function App() {
     lat: 33.42,
     lon: 32.51,
   });
+  console.log(searchPayload);
 
   const [units, setUnits] = useState(METRIC_UNITS);
   const { weatherInfo, loading, error } = useFetchWeatherData(
