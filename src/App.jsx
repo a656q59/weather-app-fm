@@ -44,6 +44,7 @@ function App() {
     searchPayload,
     units,
   );
+  console.log(weatherInfo);
   const [value, setValue] = useState(0);
   const [title, setTitle] = useState("Berlin, Germany");
   const handleChange = (value) => {
